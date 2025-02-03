@@ -21,7 +21,7 @@ func Initialize(FileLog bool) {
 
 	out := zapcore.AddSync(os.Stdout)
 	if FileLog {
-		file, err = os.OpenFile("logger.log", os.O_RDWR|os.O_TRUNC, 0644)
+		file, err = os.OpenFile("logger.log", os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 		if err != nil {
 			fmt.Println(err)
 			FileLog = false
