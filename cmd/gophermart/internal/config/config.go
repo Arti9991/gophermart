@@ -29,17 +29,17 @@ func InitConf() Config {
 	}
 
 	var conf Config
-	flag.StringVar(&conf.HostAddr, "a", "localhost:8080", "server host adress")
-	flag.StringVar(&conf.DBAdr, "d", "", "database connetion data") //"host=localhost user=myuser password=123456 dbname=ShortURL sslmode=disable"
-	flag.StringVar(&conf.AccurAddr, "r", "", "another api address")
-	flag.Parse()
-
 	err := env.Parse(&conf)
 	if err != nil {
 		logger.Log.Error("Wrong config file!", zap.Error(err))
 	}
 
-	CreateConfig(ConfigPath)
+	flag.StringVar(&conf.HostAddr, "a", conf.HostAddr, "server host adress")
+	flag.StringVar(&conf.DBAdr, "d", conf.DBAdr, "database connetion data") //"host=localhost user=myuser password=123456 dbname=ShortURL sslmode=disable"
+	flag.StringVar(&conf.AccurAddr, "r", conf.AccurAddr, "another api address")
+	flag.Parse()
+
+	CreateConfig(ConfigPath, conf)
 
 	return conf
 }
@@ -65,8 +65,8 @@ func ReadConfig(cfgFilePath string) Config {
 	return config
 }
 
-func CreateConfig(cfgFilePath string) {
-	var config Config
+func CreateConfig(cfgFilePath string, config Config) {
+	//var config Config
 
 	file, err := os.OpenFile(cfgFilePath, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
@@ -74,9 +74,6 @@ func CreateConfig(cfgFilePath string) {
 	}
 	defer file.Close()
 
-	config.HostAddr = ":8082"
-	config.DBAdr = "DB not implemented"
-	config.AccurAddr = ":2200"
 	config.InFileLog = true
 
 	enc := yaml.NewEncoder(file)
