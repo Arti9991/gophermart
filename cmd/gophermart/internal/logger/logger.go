@@ -2,6 +2,7 @@ package logger
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"time"
 
@@ -20,7 +21,7 @@ func Initialize(FileLog bool) {
 
 	out := zapcore.AddSync(os.Stdout)
 	if FileLog {
-		file, err = os.OpenFile("logger.log", os.O_RDWR|os.O_CREATE, 0644)
+		file, err = os.OpenFile("logger.log", os.O_RDWR|os.O_TRUNC, 0644)
 		if err != nil {
 			fmt.Println(err)
 			FileLog = false
@@ -57,56 +58,56 @@ func Initialize(FileLog bool) {
 	Log = zap.New(core)
 }
 
-// // middleware обработчик для zap логгера с логированием полученных и отправленных запросов
-// func MiddlewareLogger(h http.HandlerFunc) http.HandlerFunc {
-// 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
-// 		start := time.Now()
-// 		responseData := &responseData{
-// 			status: 0,
-// 			size:   0,
-// 		}
-// 		reslog := loggingResponseWriter{
-// 			ResponseWriter: res, //встраиваем оригинальный http.ResponseWriter
-// 			responseData:   responseData,
-// 		}
-// 		h(&reslog, req)
-// 		duration := time.Since(start)
-// 		Log.Info("got incoming HTTP request",
-// 			zap.String("URI", req.RequestURI),
-// 			zap.String("method", req.Method),
-// 		)
-// 		Log.Info("responce on request",
-// 			zap.Int("status", responseData.status),
-// 			zap.Int("size", responseData.size),
-// 			zap.Duration("duration", duration),
-// 		)
-// 	})
-// }
+// middleware обработчик для zap логгера с логированием полученных и отправленных запросов
+func MiddlewareLogger(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+		start := time.Now()
+		responseData := &responseData{
+			status: 0,
+			size:   0,
+		}
+		reslog := loggingResponseWriter{
+			ResponseWriter: res, //встраиваем оригинальный http.ResponseWriter
+			responseData:   responseData,
+		}
+		h.ServeHTTP(&reslog, req)
+		duration := time.Since(start)
+		Log.Info("got incoming HTTP request",
+			zap.String("URI", req.RequestURI),
+			zap.String("method", req.Method),
+		)
+		Log.Info("responce on request",
+			zap.Int("status", responseData.status),
+			zap.Int("size", responseData.size),
+			zap.Duration("duration", duration),
+		)
+	})
+}
 
-// // переопределение методов write и WriteHeader для удобного использования middleware
-// type (
-// 	//структура для хранения сведений об ответе
-// 	responseData struct {
-// 		status int
-// 		size   int
-// 	}
+// переопределение методов write и WriteHeader для удобного использования middleware
+type (
+	//структура для хранения сведений об ответе
+	responseData struct {
+		status int
+		size   int
+	}
 
-// 	//реализация http.ResponseWriter
-// 	loggingResponseWriter struct {
-// 		http.ResponseWriter //встраиваем оригинальный http.ResponseWriter
-// 		responseData        *responseData
-// 	}
-// )
+	//реализация http.ResponseWriter
+	loggingResponseWriter struct {
+		http.ResponseWriter //встраиваем оригинальный http.ResponseWriter
+		responseData        *responseData
+	}
+)
 
-// func (r *loggingResponseWriter) Write(b []byte) (int, error) {
-// 	//запись ответа, используя оригинальный http.ResponseWriter
-// 	size, err := r.ResponseWriter.Write(b)
-// 	r.responseData.size += size
-// 	return size, err
-// }
+func (r *loggingResponseWriter) Write(b []byte) (int, error) {
+	//запись ответа, используя оригинальный http.ResponseWriter
+	size, err := r.ResponseWriter.Write(b)
+	r.responseData.size += size
+	return size, err
+}
 
-// func (r *loggingResponseWriter) WriteHeader(statusCode int) {
-// 	//запись кода статуса, используя оригинальный http.ResponseWriter
-// 	r.ResponseWriter.WriteHeader(statusCode)
-// 	r.responseData.status = statusCode //код статуса
-// }
+func (r *loggingResponseWriter) WriteHeader(statusCode int) {
+	//запись кода статуса, используя оригинальный http.ResponseWriter
+	r.ResponseWriter.WriteHeader(statusCode)
+	r.responseData.status = statusCode //код статуса
+}
