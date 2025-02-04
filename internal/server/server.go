@@ -2,6 +2,7 @@ package server
 
 import (
 	"gophermart/internal/app/handlers"
+	"gophermart/internal/app/middleware"
 	"gophermart/internal/config"
 	"gophermart/internal/logger"
 	"gophermart/internal/storage/database"
@@ -12,6 +13,8 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/exp/rand"
 )
+
+//var key = []byte{99, 65, 113, 122, 87, 106, 113, 81, 114, 115, 66, 117, 107, 81, 116, 108, 73, 77, 75, 111, 89, 71, 79, 106, 118, 76, 69, 106, 115, 116, 75, 101}
 
 var InFileLog = true
 
@@ -46,10 +49,11 @@ func InitServer() Server {
 func (s *Server) MainRouter() chi.Router {
 
 	rt := chi.NewRouter()
-	rt.Use(logger.MiddlewareLogger)
+	rt.Use(middleware.MiddlewareLogger, middleware.MiddlewareAuth)
 	rt.Route("/api/user/", func(rt chi.Router) {
 		rt.Post("/register", handlers.UserRegister(s.hd))
 		rt.Post("/login", handlers.UserLogin(s.hd))
+		rt.Post("/orders", handlers.PostOrder(s.hd))
 	})
 
 	return rt

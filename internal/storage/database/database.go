@@ -12,7 +12,7 @@ var QuerryCreateUserStor = `CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
 	user_id VARCHAR(16),
     login 	VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(64) NOT NULL
 	);`
 var QuerrySaveUser = `INSERT INTO users (id, user_id, login, password)
   	VALUES  (DEFAULT, $1, $2, $3);`

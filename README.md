@@ -23,3 +23,21 @@ git fetch template && git checkout template/master .github
 ```
 
 Затем добавьте полученные изменения в свой репозиторий.
+
+# Тестовые запросы для ручной проверки сервера
+
+Запрос на регистрацию нового пользователя:
+
+```
+curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/register
+```
+
+Запрос на вход пользователя:
+```
+curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/login
+```
+
+Запрос на отправку номера заказа от пользователя
+```
+curl -v -X POST -H "Content-Type: text/plain" --cookie "userID=<cookie>" -d 1234567890101112131415 http://localhost:8082/api/user/order
+```

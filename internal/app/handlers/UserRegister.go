@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
+	"gophermart/internal/app/middleware"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"net/http"
@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
-// хэндлер для регистрации нового пользователя в системе
+// хэндлер для регистрации нового пользователя в системе и выдачи cookie
 func UserRegister(hd *HandlersData) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
 		if req.Method != http.MethodPost {
@@ -26,7 +26,7 @@ func UserRegister(hd *HandlersData) http.HandlerFunc {
 			return
 		}
 		var UserData models.UserRigisterLogin
-
+		// декодирование данных пользователя из запроса
 		err := json.NewDecoder(req.Body).Decode(&UserData)
 		if err != nil {
 			logger.Log.Info("Bad request body", zap.Error(err))
@@ -35,8 +35,10 @@ func UserRegister(hd *HandlersData) http.HandlerFunc {
 		}
 
 		UserID := models.RandomString(16)
-		fmt.Println(UserData, UserID)
-		err = hd.StorFunc.SaveUser(UserData.Login, UserData.Password, UserID)
+		// хэширование пароля для записи в базу
+		CdPassword := CodePassword(UserData.Password)
+		// сохранение пользователя в базе данных
+		err = hd.StorFunc.SaveUser(UserData.Login, CdPassword, UserID)
 		if err != nil {
 			if strings.Contains(err.Error(), pgerrcode.UniqueViolation) {
 				res.WriteHeader(http.StatusConflict)
@@ -47,13 +49,20 @@ func UserRegister(hd *HandlersData) http.HandlerFunc {
 				return
 			}
 		}
-
-		res.Header().Set("content-type", "application/json")
+		// создание JWT для выдачи зарегестрированному пользователю
+		JWTstring, err := middleware.BuildJWTString(UserID)
+		if err != nil {
+			logger.Log.Error("Error in BuildJWTString!", zap.Error(err))
+			res.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		cookie := &http.Cookie{
+			Name:  "Token",
+			Value: JWTstring,
+		}
+		// выдача куки с валидным cookie для сессии данного пользователя
+		http.SetCookie(res, cookie)
 		res.WriteHeader(http.StatusOK)
-		res.Write([]byte("Test Answer UserRegister"))
 	}
 
 }
-
-// curl -v -X POST -H "Content-Type: application/json" -d '[
-// {"Login":"ID","password":"12345678"}]' http://localhost:8082/api/user/register

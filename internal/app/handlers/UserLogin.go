@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
+	"gophermart/internal/app/middleware"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"net/http"
@@ -11,7 +11,7 @@ import (
 	"go.uber.org/zap"
 )
 
-// хэндлер для получения оригинального URL по укороченному
+// хэндлер для авторизации пользователя и выдачи cookie
 func UserLogin(hd *HandlersData) http.HandlerFunc {
 	return func(res http.ResponseWriter, req *http.Request) {
 		if req.Method != http.MethodPost {
@@ -25,15 +25,15 @@ func UserLogin(hd *HandlersData) http.HandlerFunc {
 			return
 		}
 		var UserData models.UserRigisterLogin
-
+		// декодирование данных пользователя из запроса
 		err := json.NewDecoder(req.Body).Decode(&UserData)
 		if err != nil {
 			logger.Log.Info("Bad request body", zap.Error(err))
 			res.WriteHeader(http.StatusBadRequest)
 			return
 		}
-
-		UserID, password, err := hd.StorFunc.GetUserID(UserData.Login)
+		// получение хэшированного пароля и идентификатора пользователя из базы по логину
+		UserID, passwordCD, err := hd.StorFunc.GetUserID(UserData.Login)
 		if err != nil {
 			if strings.Contains(err.Error(), models.ErrorNoUserString) {
 				res.WriteHeader(http.StatusUnauthorized)
@@ -44,15 +44,27 @@ func UserLogin(hd *HandlersData) http.HandlerFunc {
 				return
 			}
 		}
-		fmt.Println(UserID, password)
-		if password != UserData.Password {
+		// хэширование пароля из запроса
+		passwordIN := CodePassword(UserData.Password)
+		// проверка подлинности пароля и его соответствие с паролем в базе
+		if passwordIN != passwordCD {
 			res.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-
-		res.Header().Set("content-type", "application/json")
+		// создание JWT для выдачи авторизованному пользователю
+		JWTstring, err := middleware.BuildJWTString(UserID)
+		if err != nil {
+			logger.Log.Error("Error in BuildJWTString!", zap.Error(err))
+			res.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		cookie := &http.Cookie{
+			Name:  "Token",
+			Value: JWTstring,
+		}
+		// выдача куки с валидным cookie для сессии данного пользователя
+		http.SetCookie(res, cookie)
 		res.WriteHeader(http.StatusOK)
-		res.Write([]byte("Test Answer UserRegister"))
 	}
 
 }
