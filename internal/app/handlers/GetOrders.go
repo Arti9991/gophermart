@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"net/http"
@@ -16,7 +15,6 @@ func GetOrders(hd *HandlersData) http.HandlerFunc {
 
 		UserInfo := req.Context().Value(models.CtxKey).(models.UserInfo)
 		UserID := UserInfo.UserID
-		fmt.Println(UserID)
 
 		OrderList, err := hd.StorOrder.GetUserOrders(UserID)
 		if err != nil {

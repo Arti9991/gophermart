@@ -2,16 +2,21 @@ package handlers
 
 import (
 	"bytes"
+	"context"
+	"encoding/json"
 	"errors"
 	"gophermart/internal/models"
 	"gophermart/internal/storage/mocks"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
+	"time"
 
 	"github.com/golang/mock/gomock"
 	"github.com/jackc/pgerrcode"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 //для базовых тестов производится генерация моков командой ниже
@@ -212,6 +217,221 @@ func TestLogin(t *testing.T) {
 			result := w.Result()
 			assert.Equal(t, test.want.statusCode, result.StatusCode)
 
+		})
+	}
+}
+
+func TestPostOrder(t *testing.T) {
+	// создаём контроллер
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	// создаём объект-заглушку
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
+	// инциализация handlers data для тестов
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
+
+	type want struct {
+		statusCode int
+		err        error
+	}
+
+	tests := []struct {
+		name    string
+		userID  string
+		request string
+		body    string
+		want    want
+	}{
+		{
+			name:    "Request for code 500",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "12345678903",
+			want: want{
+				statusCode: 500,
+				err:        errors.New("some sql error"),
+			},
+		},
+		{
+			name:    "Simple request for code 202",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "12345678903",
+			want: want{
+				statusCode: 202,
+				err:        nil,
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "12345678903",
+			want: want{
+				statusCode: 200,
+				err:        models.ErrorUserAlreadyHas,
+			},
+		},
+		{
+			name:    "Request for code 409",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "12345678903",
+			want: want{
+				statusCode: 409,
+				err:        models.ErrorAnotherUserHas,
+			},
+		},
+		{
+			name:    "Request for code 422",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "123456",
+			want: want{
+				statusCode: 422,
+				err:        models.ErrorAnotherUserHas,
+			},
+		},
+		{
+			name:    "Request for code 400",
+			userID:  "userID",
+			request: "/api/user/orders",
+			body:    "",
+			want: want{
+				statusCode: 400,
+				err:        nil,
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+
+			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
+			m2.EXPECT().
+				SaveNewOrder(gomock.Any(), gomock.Any()).
+				Return(test.want.err).
+				MaxTimes(1)
+
+			request := httptest.NewRequest(http.MethodPost, test.request, strings.NewReader(test.body))
+
+			ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: test.userID})
+			request = request.WithContext(ctx)
+
+			request.Header.Add("Content-Type", "text/plain")
+			// ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: UserID})
+			// request = request.WithContext(ctx)
+
+			w := httptest.NewRecorder()
+			h := http.HandlerFunc(PostOrder(hd))
+			h(w, request)
+
+			result := w.Result()
+			assert.Equal(t, test.want.statusCode, result.StatusCode)
+
+		})
+	}
+}
+
+func TestGetOrder(t *testing.T) {
+	// создаём контроллер
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	// создаём объект-заглушку
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
+	// инциализация handlers data для тестов
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
+
+	type want struct {
+		statusCode int
+		answer     models.UserOrdersList
+		err        error
+	}
+
+	tests := []struct {
+		name    string
+		userID  string
+		request string
+		want    want
+	}{
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/orders",
+			want: want{
+				statusCode: 200,
+				answer: []models.UserOrder{
+					{Number: "12345678903", Status: "NEW", Accrual: 0.0, LoadedTime: time.Now().Format(time.RFC3339)},
+				},
+				err: nil,
+			},
+		},
+		{
+			name:    "Request for code 200",
+			userID:  "userID",
+			request: "/api/user/orders",
+			want: want{
+				statusCode: 200,
+				answer: []models.UserOrder{
+					{Number: "12345678903", Status: "NEW", Accrual: 0.0, LoadedTime: time.Now().Format(time.RFC3339)},
+					{Number: "346436439", Status: "PROCESSED", Accrual: 5000.0, LoadedTime: time.Now().Format(time.RFC3339)},
+					{Number: "9278923470", Status: "INVALID", Accrual: 100.5, LoadedTime: time.Now().Format(time.RFC3339)},
+				},
+				err: nil,
+			},
+		},
+		{
+			name:    "Request for code 204",
+			userID:  "userID",
+			request: "/api/user/orders",
+			want: want{
+				statusCode: 204,
+				answer:     nil,
+				err:        models.ErrorNoOrdersUser,
+			},
+		},
+		{
+			name:    "Request for code 500",
+			userID:  "userID",
+			request: "/api/user/orders",
+			want: want{
+				statusCode: 500,
+				answer:     nil,
+				err:        errors.New("some sql error"),
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+
+			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
+			m2.EXPECT().
+				GetUserOrders(gomock.Any()).
+				Return(test.want.answer, test.want.err).
+				MaxTimes(1)
+
+			request := httptest.NewRequest(http.MethodGet, test.request, nil)
+
+			ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: test.userID})
+			request = request.WithContext(ctx)
+
+			w := httptest.NewRecorder()
+			h := http.HandlerFunc(GetOrders(hd))
+			h(w, request)
+
+			result := w.Result()
+			assert.Equal(t, test.want.statusCode, result.StatusCode)
+
+			var outBuff models.UserOrdersList
+			json.NewDecoder(result.Body).Decode(&outBuff)
+
+			assert.Equal(t, test.want.answer, outBuff)
+
+			err := result.Body.Close()
+			require.NoError(t, err)
 		})
 	}
 }

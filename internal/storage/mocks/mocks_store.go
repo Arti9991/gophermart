@@ -5,6 +5,7 @@
 package mocks
 
 import (
+	models "gophermart/internal/models"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
@@ -84,6 +85,21 @@ func NewMockStorOrderFunc(ctrl *gomock.Controller) *MockStorOrderFunc {
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockStorOrderFunc) EXPECT() *MockStorOrderFuncMockRecorder {
 	return m.recorder
+}
+
+// GetUserOrders mocks base method.
+func (m *MockStorOrderFunc) GetUserOrders(UserID string) (models.UserOrdersList, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserOrders", UserID)
+	ret0, _ := ret[0].(models.UserOrdersList)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserOrders indicates an expected call of GetUserOrders.
+func (mr *MockStorOrderFuncMockRecorder) GetUserOrders(UserID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).GetUserOrders), UserID)
 }
 
 // SaveNewOrder mocks base method.
