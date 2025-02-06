@@ -37,11 +37,15 @@ func InitServer() Server {
 	)
 
 	server.Config = config.InitConf()
-	server.DataBase, err = database.DBinit(server.Config.DBAdr)
+	server.DataBase, err = database.DBUserInit(server.Config.DBAdr)
 	if err != nil {
-		logger.Log.Fatal("Error in initialyzed database", zap.Error(err))
+		logger.Log.Fatal("Error in initialyzed database for users", zap.Error(err))
 	}
-	server.hd = handlers.HandlersDataInit(server.Config.HostAddr, server.Config.AccurAddr, server.DataBase)
+	err = server.DataBase.DBOrdersInit()
+	if err != nil {
+		logger.Log.Fatal("Error in initialyzed database for orders", zap.Error(err))
+	}
+	server.hd = handlers.HandlersDataInit(server.Config.HostAddr, server.Config.AccurAddr, server.DataBase, server.DataBase)
 	return server
 }
 
@@ -54,6 +58,7 @@ func (s *Server) MainRouter() chi.Router {
 		rt.Post("/register", handlers.UserRegister(s.hd))
 		rt.Post("/login", handlers.UserLogin(s.hd))
 		rt.Post("/orders", handlers.PostOrder(s.hd))
+		rt.Get("/orders", handlers.GetOrders(s.hd))
 	})
 
 	return rt

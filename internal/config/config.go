@@ -35,7 +35,7 @@ func InitConf() Config {
 	}
 
 	flag.StringVar(&conf.HostAddr, "a", conf.HostAddr, "server host adress")
-	flag.StringVar(&conf.DBAdr, "d", conf.DBAdr, "database connetion data") //"host=localhost user=myuser password=123456 dbname=ShortURL sslmode=disable"
+	flag.StringVar(&conf.DBAdr, "d", conf.DBAdr, "database connetion data") //"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable"
 	flag.StringVar(&conf.AccurAddr, "r", conf.AccurAddr, "another api address")
 	flag.Parse()
 

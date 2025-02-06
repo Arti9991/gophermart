@@ -5,7 +5,9 @@ import (
 	"gophermart/internal/models"
 	"io"
 	"net/http"
+	"strconv"
 
+	"github.com/theplant/luhn"
 	"go.uber.org/zap"
 )
 
@@ -20,19 +22,44 @@ func PostOrder(hd *HandlersData) http.HandlerFunc {
 
 		body, err := io.ReadAll(req.Body)
 		if err != nil || string(body) == "" {
-			logger.Log.Info("Bad request body", zap.String("body", string(body)))
+			logger.Log.Error("Bad request body. ReadAll", zap.Error(err), zap.String("body", string(body)))
 			res.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		numberStr := string(body)
+		numberInt, err := strconv.Atoi(string(body))
+		if err != nil {
+			logger.Log.Error("Bad request body. Atoi", zap.Error(err), zap.Int("number", numberInt))
+			res.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		if !luhn.Valid(numberInt) {
+			logger.Log.Error("Wrong number for luhn", zap.Error(err), zap.Int("number", numberInt))
+			res.WriteHeader(http.StatusUnprocessableEntity)
 			return
 		}
 
 		UserInfo := req.Context().Value(models.CtxKey).(models.UserInfo)
 		UserID := UserInfo.UserID
 
-		ansStr := "\n" + "user ID is:" + UserID + "\n" + "order is:" + string(body) + "\n"
+		err = hd.StorOrder.SaveNewOrder(UserID, numberStr)
+		if err != nil {
+			if err == models.ErrorUserAlreadyHas {
+				logger.Log.Info("User already has that number", zap.Int("number", numberInt), zap.String("UserID", UserID))
+				res.WriteHeader(http.StatusOK)
+				return
+			} else if err == models.ErrorAnotherUserHas {
+				logger.Log.Info("Another user has that number", zap.Int("number", numberInt))
+				res.WriteHeader(http.StatusConflict)
+				return
+			} else {
+				logger.Log.Error("Error in SaveNewOrder", zap.Error(err))
+				res.WriteHeader(http.StatusInternalServerError)
+				return
+			}
+		}
 
-		res.Header().Set("content-type", "text/plain")
-		res.WriteHeader(http.StatusOK)
-		res.Write([]byte(ansStr))
+		res.WriteHeader(http.StatusAccepted)
 	}
 
 }

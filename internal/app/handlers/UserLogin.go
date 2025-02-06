@@ -33,7 +33,7 @@ func UserLogin(hd *HandlersData) http.HandlerFunc {
 			return
 		}
 		// получение хэшированного пароля и идентификатора пользователя из базы по логину
-		UserID, passwordCD, err := hd.StorFunc.GetUserID(UserData.Login)
+		UserID, passwordCD, err := hd.StorUser.GetUserID(UserData.Login)
 		if err != nil {
 			if strings.Contains(err.Error(), models.ErrorNoUserString) {
 				res.WriteHeader(http.StatusUnauthorized)

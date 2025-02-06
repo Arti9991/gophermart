@@ -38,7 +38,7 @@ func UserRegister(hd *HandlersData) http.HandlerFunc {
 		// хэширование пароля для записи в базу
 		CdPassword := CodePassword(UserData.Password)
 		// сохранение пользователя в базе данных
-		err = hd.StorFunc.SaveUser(UserData.Login, CdPassword, UserID)
+		err = hd.StorUser.SaveUser(UserData.Login, CdPassword, UserID)
 		if err != nil {
 			if strings.Contains(err.Error(), pgerrcode.UniqueViolation) {
 				res.WriteHeader(http.StatusConflict)

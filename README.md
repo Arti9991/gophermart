@@ -39,5 +39,5 @@ curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -
 
 Запрос на отправку номера заказа от пользователя
 ```
-curl -v -X POST -H "Content-Type: text/plain" --cookie "userID=<cookie>" -d 1234567890101112131415 http://localhost:8082/api/user/order
+curl -v -X POST -H "Content-Type: text/plain" --cookie "userID=<cookie>" -d 1234567890101112131415 http://localhost:8082/api/user/orders
 ```

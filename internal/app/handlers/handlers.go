@@ -9,12 +9,13 @@ import (
 type HandlersData struct {
 	BaseAddr  string
 	AccurAddr string
-	StorFunc  storage.StorFunc
+	StorUser  storage.StorUserFunc
+	StorOrder storage.StorOrderFunc
 	//DbStor
 }
 
-func HandlersDataInit(BaseAddr string, AccurAddr string, Stor storage.StorFunc) *HandlersData {
-	return &HandlersData{BaseAddr: BaseAddr, AccurAddr: AccurAddr, StorFunc: Stor}
+func HandlersDataInit(BaseAddr string, AccurAddr string, StorUser storage.StorUserFunc, StorOrder storage.StorOrderFunc) *HandlersData {
+	return &HandlersData{BaseAddr: BaseAddr, AccurAddr: AccurAddr, StorUser: StorUser, StorOrder: StorOrder}
 }
 
 // функция хэширования для паролей (sha256)

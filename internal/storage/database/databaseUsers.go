@@ -12,21 +12,26 @@ var QuerryCreateUserStor = `CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
 	user_id VARCHAR(16),
     login 	VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(64) NOT NULL
+    password VARCHAR(64) NOT NULL,
+	sum BIGINT NOT NULL,
+	withdraw BIGINT NOT NULL
 	);`
-var QuerrySaveUser = `INSERT INTO users (id, user_id, login, password)
-  	VALUES  (DEFAULT, $1, $2, $3);`
+var QuerrySaveUser = `INSERT INTO users (id, user_id, login, password, sum, withdraw)
+  	VALUES  (DEFAULT, $1, $2, $3, 0, 0);`
 var QuerryGetUser = `SELECT user_id, password
 	FROM users WHERE login = $1 LIMIT 1;`
+var QuerryUpdateUserSum = `UPDATE users SET sum = ($1)
+	WHERE user_id = ($2);`
 
 type DBStor struct {
-	storage.StorFunc
+	storage.StorUserFunc
+	storage.StorOrderFunc
 	DB     *sql.DB
 	DBInfo string
 }
 
 // инициализация хранилища и создание/подключение к таблице
-func DBinit(DBInfo string) (*DBStor, error) {
+func DBUserInit(DBInfo string) (*DBStor, error) {
 	var db DBStor
 	var err error
 
@@ -45,7 +50,7 @@ func DBinit(DBInfo string) (*DBStor, error) {
 	if err != nil {
 		return &DBStor{}, err
 	}
-	logger.Log.Info("✓ connected to ShortURL db!")
+	logger.Log.Info("✓ created users table!")
 	return &db, nil
 }
 

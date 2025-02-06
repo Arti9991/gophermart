@@ -10,31 +10,31 @@ import (
 	gomock "github.com/golang/mock/gomock"
 )
 
-// MockStorFunc is a mock of StorFunc interface.
-type MockStorFunc struct {
+// MockStorUserFunc is a mock of StorUserFunc interface.
+type MockStorUserFunc struct {
 	ctrl     *gomock.Controller
-	recorder *MockStorFuncMockRecorder
+	recorder *MockStorUserFuncMockRecorder
 }
 
-// MockStorFuncMockRecorder is the mock recorder for MockStorFunc.
-type MockStorFuncMockRecorder struct {
-	mock *MockStorFunc
+// MockStorUserFuncMockRecorder is the mock recorder for MockStorUserFunc.
+type MockStorUserFuncMockRecorder struct {
+	mock *MockStorUserFunc
 }
 
-// NewMockStorFunc creates a new mock instance.
-func NewMockStorFunc(ctrl *gomock.Controller) *MockStorFunc {
-	mock := &MockStorFunc{ctrl: ctrl}
-	mock.recorder = &MockStorFuncMockRecorder{mock}
+// NewMockStorUserFunc creates a new mock instance.
+func NewMockStorUserFunc(ctrl *gomock.Controller) *MockStorUserFunc {
+	mock := &MockStorUserFunc{ctrl: ctrl}
+	mock.recorder = &MockStorUserFuncMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockStorFunc) EXPECT() *MockStorFuncMockRecorder {
+func (m *MockStorUserFunc) EXPECT() *MockStorUserFuncMockRecorder {
 	return m.recorder
 }
 
 // GetUserID mocks base method.
-func (m *MockStorFunc) GetUserID(Login string) (string, string, error) {
+func (m *MockStorUserFunc) GetUserID(Login string) (string, string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserID", Login)
 	ret0, _ := ret[0].(string)
@@ -44,13 +44,13 @@ func (m *MockStorFunc) GetUserID(Login string) (string, string, error) {
 }
 
 // GetUserID indicates an expected call of GetUserID.
-func (mr *MockStorFuncMockRecorder) GetUserID(Login interface{}) *gomock.Call {
+func (mr *MockStorUserFuncMockRecorder) GetUserID(Login interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserID", reflect.TypeOf((*MockStorFunc)(nil).GetUserID), Login)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserID", reflect.TypeOf((*MockStorUserFunc)(nil).GetUserID), Login)
 }
 
 // SaveUser mocks base method.
-func (m *MockStorFunc) SaveUser(Login, Password, UserID string) error {
+func (m *MockStorUserFunc) SaveUser(Login, Password, UserID string) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SaveUser", Login, Password, UserID)
 	ret0, _ := ret[0].(error)
@@ -58,7 +58,44 @@ func (m *MockStorFunc) SaveUser(Login, Password, UserID string) error {
 }
 
 // SaveUser indicates an expected call of SaveUser.
-func (mr *MockStorFuncMockRecorder) SaveUser(Login, Password, UserID interface{}) *gomock.Call {
+func (mr *MockStorUserFuncMockRecorder) SaveUser(Login, Password, UserID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUser", reflect.TypeOf((*MockStorFunc)(nil).SaveUser), Login, Password, UserID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveUser", reflect.TypeOf((*MockStorUserFunc)(nil).SaveUser), Login, Password, UserID)
+}
+
+// MockStorOrderFunc is a mock of StorOrderFunc interface.
+type MockStorOrderFunc struct {
+	ctrl     *gomock.Controller
+	recorder *MockStorOrderFuncMockRecorder
+}
+
+// MockStorOrderFuncMockRecorder is the mock recorder for MockStorOrderFunc.
+type MockStorOrderFuncMockRecorder struct {
+	mock *MockStorOrderFunc
+}
+
+// NewMockStorOrderFunc creates a new mock instance.
+func NewMockStorOrderFunc(ctrl *gomock.Controller) *MockStorOrderFunc {
+	mock := &MockStorOrderFunc{ctrl: ctrl}
+	mock.recorder = &MockStorOrderFuncMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockStorOrderFunc) EXPECT() *MockStorOrderFuncMockRecorder {
+	return m.recorder
+}
+
+// SaveNewOrder mocks base method.
+func (m *MockStorOrderFunc) SaveNewOrder(UserID, number string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveNewOrder", UserID, number)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SaveNewOrder indicates an expected call of SaveNewOrder.
+func (mr *MockStorOrderFuncMockRecorder) SaveNewOrder(UserID, number interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveNewOrder", reflect.TypeOf((*MockStorOrderFunc)(nil).SaveNewOrder), UserID, number)
 }

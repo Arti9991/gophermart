@@ -15,7 +15,7 @@ import (
 )
 
 //для базовых тестов производится генерация моков командой ниже
-// mockgen --source=./internal/storage/storage.go --destination=./internal/storage/mocks/mocks_store.go --package=mocks StorFunc
+// mockgen --source=./internal/storage/storage.go --destination=./internal/storage/mocks/mocks_store.go --package=mocks StorFunc StorOrder
 
 var BaseAdr = "http://example.com"
 
@@ -27,9 +27,10 @@ func TestRegistration(t *testing.T) {
 	defer ctrl.Finish()
 
 	// создаём объект-заглушку
-	m := mocks.NewMockStorFunc(ctrl)
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
 	// инциализация handlers data для тестов
-	hd := HandlersDataInit(BaseAdr, "", m)
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
 
 	type want struct {
 		statusCode int
@@ -91,7 +92,7 @@ func TestRegistration(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
-			m.EXPECT().
+			m1.EXPECT().
 				SaveUser(gomock.Any(), gomock.Any(), gomock.Any()).
 				Return(test.want.err).
 				MaxTimes(1)
@@ -118,9 +119,10 @@ func TestLogin(t *testing.T) {
 	defer ctrl.Finish()
 
 	// создаём объект-заглушку
-	m := mocks.NewMockStorFunc(ctrl)
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
 	// инциализация handlers data для тестов
-	hd := HandlersDataInit(BaseAdr, "", m)
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
 
 	type want struct {
 		statusCode int
@@ -194,7 +196,7 @@ func TestLogin(t *testing.T) {
 			// кодирование пароля из теста
 			test.want.password = CodePassword(test.want.password)
 			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
-			m.EXPECT().
+			m1.EXPECT().
 				GetUserID(gomock.Any()).
 				Return(test.want.userID, test.want.password, test.want.err).
 				MaxTimes(1)
