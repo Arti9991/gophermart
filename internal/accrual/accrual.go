@@ -48,13 +48,17 @@ func (AccDt *AccrualData) LoadNumberToApi(numCh <-chan models.OrderAns) chan mod
 					response.Body.Close()
 					time.Sleep(timeSleep)
 					continue
-				}
-				// читаем поток из тела ответа
-				err = json.NewDecoder(response.Body).Decode(&outBuff)
-				if err != nil && err != io.EOF {
-					logger.Log.Error("Error in Decode", zap.Error(err))
-					response.Body.Close()
-					continue
+				} else if response.StatusCode == http.StatusNoContent {
+					outBuff.Accrual = 0.0
+					outBuff.Status = "INVALID"
+				} else if response.StatusCode == http.StatusOK {
+					// читаем поток из тела ответа
+					err = json.NewDecoder(response.Body).Decode(&outBuff)
+					if err != nil && err != io.EOF {
+						logger.Log.Error("Error in Decode", zap.Error(err))
+						response.Body.Close()
+						continue
+					}
 				}
 				// хаписываем результат в канал
 				outCh <- outBuff

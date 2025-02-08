@@ -40,6 +40,7 @@ func main() {
 	}
 }
 
+// заполняем accural товарами и суммой их вознагпаждения
 func NewGoodsTypes(AccAddr string) ([]GoodType, error) {
 	var MassGoods []GoodType
 
@@ -103,6 +104,8 @@ func NewGoodsTypes(AccAddr string) ([]GoodType, error) {
 	}
 	return MassGoods, nil
 }
+
+// создаем список возможных заказов, которые доступны в accrual
 func PostNumberToApi(AccAddr string, n int, Types []GoodType) error {
 	file, err := os.OpenFile("orders_numbers.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {

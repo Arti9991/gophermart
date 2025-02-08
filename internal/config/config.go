@@ -21,6 +21,8 @@ type Config struct {
 	InFileLog bool   `yaml:"logger_file_address"`
 }
 
+// инициализация конфигурации
+// (внутри есть флаг FileConfig для чтения конфигурации из файла)
 func InitConf() Config {
 
 	if FileConfig {
@@ -44,6 +46,7 @@ func InitConf() Config {
 	return conf
 }
 
+// чтение конфигурации из файла
 func ReadConfig(cfgFilePath string) Config {
 	var config Config
 	file, err := os.OpenFile(cfgFilePath, os.O_RDONLY, 0644)
@@ -65,6 +68,7 @@ func ReadConfig(cfgFilePath string) Config {
 	return config
 }
 
+// создание файла конфигурации с данными переданными через флаги или переменными окружения
 func CreateConfig(cfgFilePath string, config Config) {
 	//var config Config
 

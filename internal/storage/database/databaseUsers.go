@@ -59,6 +59,7 @@ func DBUserInit(DBInfo string) (*DBStor, error) {
 	return &db, nil
 }
 
+// сохранение нового пользователя в таблице пользователей
 func (db *DBStor) SaveUser(Login string, Password string, UserID string) error {
 
 	var err error
@@ -69,6 +70,7 @@ func (db *DBStor) SaveUser(Login string, Password string, UserID string) error {
 	return nil
 }
 
+// получение уникального идентификатора из базы для зарегистрированного пользователя
 func (db *DBStor) GetUserID(Login string) (string, string, error) {
 
 	var err error
@@ -84,12 +86,19 @@ func (db *DBStor) GetUserID(Login string) (string, string, error) {
 	return UserID, Password, nil
 }
 
+// запись новых начислений на баланс пользователя
 func (db *DBStor) AddUserBalance(sum float64, UserID string) error {
 
-	_, err := db.DB.Exec(QuerryUpdateUserSum, sum, UserID)
+	tx, err := db.DB.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	_, err = tx.Exec(QuerryUpdateUserSum, sum, UserID)
 	if err != nil {
 		return err
 	}
 
-	return nil
+	return tx.Commit()
 }

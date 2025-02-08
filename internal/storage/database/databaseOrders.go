@@ -32,22 +32,19 @@ var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
 	WHERE status = 'NEW' OR status = 'PROCESSING';`
 var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
 
-// var QuerryGetOrder = `SELECT user_id, password
-// 	FROM users WHERE login = $1 LIMIT 1;`
-
-// var QuerryUpdateUserSum = `UPDATE users SET sum = ($1)
-// 	WHERE user_id = ($2);`
-
 // инициализация хранилища и создание/подключение к таблице
 func (db *DBStor) DBOrdersInit() error {
-
+	// создаем таблицу заказов
 	_, err := db.DB.Exec(QuerryCreateorderStor)
 	if err != nil {
+		// если в таблице есть неопределенный тип, определяем его
 		if strings.Contains(err.Error(), pgerrcode.UndefinedObject) {
+			// определеяем тип для хранения статуса заказа
 			_, err = db.DB.Exec(QuerryCreateTypeStatus)
 			if err != nil {
 				return err
 			}
+			// создаем таблицу для заказов
 			_, err = db.DB.Exec(QuerryCreateorderStor)
 			if err != nil {
 				return err
@@ -62,18 +59,23 @@ func (db *DBStor) DBOrdersInit() error {
 	return nil
 }
 
+// функция для сохранения нового заказа пользователя в базу
 func (db *DBStor) SaveNewOrder(UserID string, number string) error {
 	uploaded := time.Now()
 	var err error
 	var UserID2 string
 	_, err = db.DB.Exec(QuerrySaveNewOrder, UserID, number, uploaded)
 	if err != nil {
+		// проверяем ошибку от SQL, если это уникальность то проверяем пользователя
 		if strings.Contains(err.Error(), pgerrcode.UniqueViolation) {
+			// получаем пользователя с таким заказом
 			row := db.DB.QueryRow(QuerryGetUserForNumber, number)
 			err = row.Scan(&UserID2)
 			if err != nil {
 				return err
 			}
+			// если это тот же пользователь, что и отправил заказ
+			// отправляем соответствующую ошибку
 			if UserID2 == UserID {
 				return models.ErrorUserAlreadyHas
 			} else {
@@ -86,6 +88,7 @@ func (db *DBStor) SaveNewOrder(UserID string, number string) error {
 	return nil
 }
 
+// функция для получения информации о всех заказах пользователя из базы
 func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 	var err error
 	var ordersList models.UserOrdersList
