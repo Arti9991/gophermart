@@ -33,6 +33,11 @@ type OrderAns struct {
 	UserID    string  `json:"-"`
 }
 
+type WithData struct {
+	Number string  `json:"order"`
+	Sum    float64 `json:"sum"`
+}
+
 func RandomString(n int) string {
 
 	var bt []byte
@@ -49,6 +54,8 @@ var ErrorBadToken = errors.New("token is not valid")
 var ErrorUserAlreadyHas = errors.New("user already downloaded this number")
 var ErrorAnotherUserHas = errors.New("another user downloaded this number")
 var ErrorNoOrdersUser = errors.New("current user has no orders")
+var ErrorNoSuchBalance = errors.New("not enough points on user balance")
+var AlreadyTakenNumber = errors.New("someone already downloaded this number")
 
 type KeyContext string
 

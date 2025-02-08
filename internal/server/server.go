@@ -67,6 +67,9 @@ func (s *Server) MainRouter() chi.Router {
 		rt.Post("/login", handlers.UserLogin(s.hd))
 		rt.Post("/orders", handlers.PostOrder(s.hd))
 		rt.Get("/orders", handlers.GetOrders(s.hd))
+		rt.Route("/balance/", func(rt chi.Router) {
+			rt.Post("/withdraw", handlers.WithdrawOrder(s.hd))
+		})
 	})
 
 	return rt

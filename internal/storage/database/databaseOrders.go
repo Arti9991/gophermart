@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"strings"
@@ -11,7 +12,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED');`
+var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED', 'WITHDRAW');`
 var QuerryCreateorderStor = `
 	CREATE TABLE IF NOT EXISTS orders (
     id SERIAL PRIMARY KEY,
@@ -31,6 +32,8 @@ var QuerryGetUserOrders = `SELECT number, status, accrual, uploaded_at FROM orde
 var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
 	WHERE status = 'NEW' OR status = 'PROCESSING';`
 var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
+var QuerrySaveWithdrawOrder = `INSERT INTO orders (id, user_id, number, status, accrual, uploaded_at)
+  	VALUES  (DEFAULT, $1, $2, 'WITHDRAW', $3, $4);`
 
 // инициализация хранилища и создание/подключение к таблице
 func (db *DBStor) DBOrdersInit() error {
@@ -187,4 +190,51 @@ func (db *DBStor) SetAccurOrders(inp chan models.OrderAns) {
 		}
 	}()
 
+}
+
+// функция для сохранения нового заказа пользователя в базу
+func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) error {
+	var userBalance float64
+	uploaded := time.Now()
+
+	tx1, err := db.DB.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx1.Rollback()
+	tx2, err := db.DB.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx2.Rollback()
+
+	// вычитаем сумму у баланса пользователя в базе в первой транзакции
+	row := tx1.QueryRow(QuerryMinusUserSum, sum, UserID)
+	// записываем данные о заказе во второй транзакции
+	_, err = tx2.Exec(QuerrySaveWithdrawOrder, UserID, number, sum, uploaded)
+	if err != nil {
+		if strings.Contains(err.Error(), pgerrcode.UniqueViolation) {
+			return models.AlreadyTakenNumber
+		} else {
+			return err
+		}
+	}
+
+	err = row.Scan(&userBalance)
+	if err != nil {
+		return err
+	}
+	if userBalance < 0 {
+		fmt.Println(userBalance)
+		return models.ErrorNoSuchBalance
+	}
+	err1 := tx1.Commit()
+	if err1 != nil {
+		return err1
+	}
+	err2 := tx2.Commit()
+	if err2 != nil {
+		return err2
+	}
+	return nil
 }

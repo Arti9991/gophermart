@@ -50,6 +50,20 @@ func (mr *MockStorUserFuncMockRecorder) GetUserID(Login interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserID", reflect.TypeOf((*MockStorUserFunc)(nil).GetUserID), Login)
 }
 
+// MinusUserBalance mocks base method.
+func (m *MockStorUserFunc) MinusUserBalance(sum float64, UserID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "MinusUserBalance", sum, UserID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// MinusUserBalance indicates an expected call of MinusUserBalance.
+func (mr *MockStorUserFuncMockRecorder) MinusUserBalance(sum, UserID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MinusUserBalance", reflect.TypeOf((*MockStorUserFunc)(nil).MinusUserBalance), sum, UserID)
+}
+
 // SaveUser mocks base method.
 func (m *MockStorUserFunc) SaveUser(Login, Password, UserID string) error {
 	m.ctrl.T.Helper()
@@ -128,6 +142,20 @@ func (m *MockStorOrderFunc) SaveNewOrder(UserID, number string) error {
 func (mr *MockStorOrderFuncMockRecorder) SaveNewOrder(UserID, number interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveNewOrder", reflect.TypeOf((*MockStorOrderFunc)(nil).SaveNewOrder), UserID, number)
+}
+
+// SaveWithdrawOrder mocks base method.
+func (m *MockStorOrderFunc) SaveWithdrawOrder(UserID, number string, sum float64) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SaveWithdrawOrder", UserID, number, sum)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SaveWithdrawOrder indicates an expected call of SaveWithdrawOrder.
+func (mr *MockStorOrderFuncMockRecorder) SaveWithdrawOrder(UserID, number, sum interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveWithdrawOrder", reflect.TypeOf((*MockStorOrderFunc)(nil).SaveWithdrawOrder), UserID, number, sum)
 }
 
 // SetAccurOrders mocks base method.

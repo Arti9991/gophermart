@@ -2,7 +2,9 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 	"gophermart/internal/logger"
+	"gophermart/internal/models"
 	"gophermart/internal/storage"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
@@ -22,6 +24,8 @@ var QuerryGetUser = `SELECT user_id, password
 	FROM users WHERE login = $1 LIMIT 1;`
 var QuerryUpdateUserSum = `UPDATE users SET sum = sum + $1
 	WHERE user_id = $2;`
+var QuerryMinusUserSum = `UPDATE users SET sum = sum - $1, withdraw = withdraw + $1
+	WHERE user_id = $2 RETURNING sum;`
 
 type DBStor struct {
 	storage.StorUserFunc
@@ -100,5 +104,28 @@ func (db *DBStor) AddUserBalance(sum float64, UserID string) error {
 		return err
 	}
 
+	return tx.Commit()
+}
+
+func (db *DBStor) MinusUserBalance(sum float64, UserID string) error {
+	var userBalance float64
+
+	tx, err := db.DB.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	row := tx.QueryRow(QuerryMinusUserSum, sum, UserID)
+
+	err = row.Scan(&userBalance)
+	if err != nil {
+		return err
+	}
+	if userBalance < 0 {
+		fmt.Println(userBalance)
+		tx.Rollback()
+		return models.ErrorNoSuchBalance
+	}
 	return tx.Commit()
 }

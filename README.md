@@ -29,12 +29,12 @@ git fetch template && git checkout template/master .github
 Запрос на регистрацию нового пользователя:
 
 ```
-curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/register
+curl -v -X POST -H "Content-Type: application/json" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/register
 ```
 
 Запрос на вход пользователя:
 ```
-curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/login
+curl -v -X POST -H "Content-Type: application/json" -d '{"login":"User","password":"12345678"}' http://localhost:8082/api/user/login
 ```
 
 Запрос на отправку номера заказа от пользователя
@@ -45,3 +45,6 @@ curl -v -X POST -H "Content-Type: text/plain" --cookie "userID=<cookie>" -d 1234
 ```
 curl -v -X GET --cookie "userID=<cookie>" http://localhost:8082/api/user/orders
 ```
+
+```
+curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"order":<order_num>,"sum": 500}' http://localhost:8082/api/user/balance/withdraw
