@@ -25,6 +25,14 @@ type UserOrder struct {
 
 type UserOrdersList []UserOrder
 
+type OrderAns struct {
+	Number    string  `json:"order"`
+	Status    string  `json:"status"`
+	Accrual   float64 `json:"accrual"`
+	StatusOld string  `json:"-"`
+	UserID    string  `json:"-"`
+}
+
 func RandomString(n int) string {
 
 	var bt []byte

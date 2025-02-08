@@ -1,0 +1,4 @@
+{"level":"info","ts":"Sat, 08 Feb 2025 17:45:33 MSK","msg":"Logger initialyzed!","In file mode:":true}
+{"level":"info","ts":"Sat, 08 Feb 2025 17:45:33 MSK","msg":"✓ created users table!"}
+{"level":"info","ts":"Sat, 08 Feb 2025 17:45:33 MSK","msg":"✓ created orders table!"}
+{"level":"info","ts":"Sat, 08 Feb 2025 17:45:33 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}

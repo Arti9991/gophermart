@@ -87,6 +87,20 @@ func (m *MockStorOrderFunc) EXPECT() *MockStorOrderFuncMockRecorder {
 	return m.recorder
 }
 
+// GetAccurOrders mocks base method.
+func (m *MockStorOrderFunc) GetAccurOrders() chan models.OrderAns {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAccurOrders")
+	ret0, _ := ret[0].(chan models.OrderAns)
+	return ret0
+}
+
+// GetAccurOrders indicates an expected call of GetAccurOrders.
+func (mr *MockStorOrderFuncMockRecorder) GetAccurOrders() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).GetAccurOrders))
+}
+
 // GetUserOrders mocks base method.
 func (m *MockStorOrderFunc) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 	m.ctrl.T.Helper()
@@ -114,4 +128,16 @@ func (m *MockStorOrderFunc) SaveNewOrder(UserID, number string) error {
 func (mr *MockStorOrderFuncMockRecorder) SaveNewOrder(UserID, number interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveNewOrder", reflect.TypeOf((*MockStorOrderFunc)(nil).SaveNewOrder), UserID, number)
+}
+
+// SetAccurOrders mocks base method.
+func (m *MockStorOrderFunc) SetAccurOrders(inp chan models.OrderAns) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetAccurOrders", inp)
+}
+
+// SetAccurOrders indicates an expected call of SetAccurOrders.
+func (mr *MockStorOrderFuncMockRecorder) SetAccurOrders(inp interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).SetAccurOrders), inp)
 }

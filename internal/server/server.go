@@ -1,6 +1,7 @@
 package server
 
 import (
+	"gophermart/internal/accrual"
 	"gophermart/internal/app/handlers"
 	"gophermart/internal/app/middleware"
 	"gophermart/internal/config"
@@ -22,30 +23,37 @@ type Server struct {
 	Config   config.Config
 	hd       *handlers.HandlersData
 	DataBase *database.DBStor
+	AccrServ *accrual.AccrualData
 }
 
+// функция инициализации структуры server
 func InitServer() Server {
 	var server Server
 	var err error
 
 	// установка сида для случайных чисел
 	rand.Seed(uint64(time.Now().UnixNano()))
-
+	// инциализация логгера
 	logger.Initialize(InFileLog)
 	logger.Log.Info("Logger initialyzed!",
 		zap.Bool("In file mode:", InFileLog),
 	)
-
+	// инциализация и получение данных для конфиогурации сервера
 	server.Config = config.InitConf()
 	server.DataBase, err = database.DBUserInit(server.Config.DBAdr)
 	if err != nil {
 		logger.Log.Fatal("Error in initialyzed database for users", zap.Error(err))
 	}
+	// инциализация и подключение к базе данных
 	err = server.DataBase.DBOrdersInit()
 	if err != nil {
 		logger.Log.Fatal("Error in initialyzed database for orders", zap.Error(err))
 	}
+	// инциализация структуры с данными для хэндлеров
 	server.hd = handlers.HandlersDataInit(server.Config.HostAddr, server.Config.AccurAddr, server.DataBase, server.DataBase)
+	// инциализация строктуры для accrual
+	server.AccrServ = accrual.AccrualDataInit(server.Config.AccurAddr)
+
 	return server
 }
 
@@ -73,10 +81,19 @@ func RunServer() error {
 		zap.String("Accur address:", server.Config.AccurAddr),
 	)
 
+	AccrRun(&server)
+
 	err := http.ListenAndServe(server.Config.HostAddr, server.MainRouter())
 	if err != nil {
 		logger.Log.Error("New server initialyzed!", zap.Error(err))
 		return err
 	}
 	return nil
+}
+
+// запуск всех ассинхронных функций связанных с accrual
+func AccrRun(server *Server) {
+	numCh := server.hd.StorOrder.GetAccurOrders()
+	orderUp := server.AccrServ.LoadNumberToApi(numCh)
+	server.hd.StorOrder.SetAccurOrders(orderUp)
 }

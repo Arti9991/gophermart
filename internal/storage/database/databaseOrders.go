@@ -8,6 +8,7 @@ import (
 
 	"github.com/jackc/pgerrcode"
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"go.uber.org/zap"
 )
 
 var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED');`
@@ -17,7 +18,7 @@ var QuerryCreateorderStor = `
 	user_id VARCHAR(16) NOT NULL,
 	number VARCHAR(32) NOT NULL UNIQUE,
     status status NOT NULL,
-    accrual DECIMAL(10,2) NOT NULL,
+    accrual NUMERIC(10,2) NOT NULL,
 	uploaded_at TIMESTAMPTZ
 	);`
 
@@ -27,6 +28,9 @@ var QuerryGetUserForNumber = `SELECT user_id FROM orders
 	WHERE number = $1 LIMIT 1;`
 var QuerryGetUserOrders = `SELECT number, status, accrual, uploaded_at FROM orders 
 	WHERE user_id = $1;`
+var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
+	WHERE status = 'NEW' OR status = 'PROCESSING';`
+var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
 
 // var QuerryGetOrder = `SELECT user_id, password
 // 	FROM users WHERE login = $1 LIMIT 1;`
@@ -111,17 +115,73 @@ func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 	return ordersList, nil
 }
 
-// func (db *DBStor) GetUserID(Login string) (string, string, error) {
+// функция для получения из БД всех заказов со статусом NEW или PROCESSING
+// и последующей передаче их в канал
+func (db *DBStor) GetAccurOrders() chan models.OrderAns {
+	numCh := make(chan models.OrderAns)
+	go func() {
+		for {
+			// формируется querry запрос
+			rows, err := db.DB.Query(QuerryGetAccurOrders)
+			if err != nil {
+				logger.Log.Error("Error in creating Query", zap.Error(err))
+				rows.Close()
+				return
+			}
+			for rows.Next() {
+				// получение данных из ряда
+				var AnsOrd models.OrderAns
+				err := rows.Scan(&AnsOrd.Number, &AnsOrd.StatusOld, &AnsOrd.UserID)
+				if err != nil {
+					logger.Log.Error("Error in Scan Query", zap.Error(err))
+					rows.Close()
+					continue
+				}
+				// передача данных в канал для отправки к Accural
+				numCh <- AnsOrd
+				// ожидание флага о записи обновленных данных
+				<-db.flagCh
+			}
+			if err := rows.Err(); err != nil {
+				logger.Log.Error("Error in rows", zap.Error(err))
+				rows.Close()
+				continue
+			}
+			rows.Close()
+		}
+	}()
 
-// 	var err error
-// 	var UserID string
-// 	var Password string
+	return numCh
+}
 
-// 	row := db.DB.QueryRow(QuerryGetUser, Login)
-// 	err = row.Scan(&UserID, &Password)
-// 	if err != nil {
-// 		return "", "", err
-// 	}
+// функция для записи обновленных данных в базу в таблицы users и orders
+func (db *DBStor) SetAccurOrders(inp chan models.OrderAns) {
+	go func() {
+		for {
+			select {
+			case toWrite := <-inp:
+				// проверяем обновился ли статус заказа
+				if toWrite.Status != toWrite.StatusOld {
+					// для нового статуса записываем новые данные в базу о заказах
+					_, err := db.DB.Exec(QuerrySaveAccurOrders, toWrite.Status, toWrite.Accrual, toWrite.Number)
+					if err != nil {
+						logger.Log.Error("Error in rows", zap.Error(err))
+					}
+					// уведомляем стартовую горутину об успешной операции записи
+					db.flagCh <- struct{}{}
+					// если статус операции успешеный, прибавляеми сумму баллов на баланс пользователя
+					if toWrite.Status == "PROCESSED" {
+						// функция для обнловления баланса пользователя с прибавлением полученных баллов
+						err := db.AddUserBalance(toWrite.Accrual, toWrite.UserID)
+						if err != nil {
+							logger.Log.Error("Error in AddUserBalance", zap.Error(err))
+						}
+					}
+				}
+			default:
+				continue
+			}
+		}
+	}()
 
-// 	return UserID, Password, nil
-// }
+}
