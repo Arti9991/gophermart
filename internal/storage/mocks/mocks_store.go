@@ -34,6 +34,21 @@ func (m *MockStorUserFunc) EXPECT() *MockStorUserFuncMockRecorder {
 	return m.recorder
 }
 
+// GetUserBalance mocks base method.
+func (m *MockStorUserFunc) GetUserBalance(UserID string) (models.BalanceData, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserBalance", UserID)
+	ret0, _ := ret[0].(models.BalanceData)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserBalance indicates an expected call of GetUserBalance.
+func (mr *MockStorUserFuncMockRecorder) GetUserBalance(UserID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserBalance", reflect.TypeOf((*MockStorUserFunc)(nil).GetUserBalance), UserID)
+}
+
 // GetUserID mocks base method.
 func (m *MockStorUserFunc) GetUserID(Login string) (string, string, error) {
 	m.ctrl.T.Helper()
@@ -128,6 +143,21 @@ func (m *MockStorOrderFunc) GetUserOrders(UserID string) (models.UserOrdersList,
 func (mr *MockStorOrderFuncMockRecorder) GetUserOrders(UserID interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).GetUserOrders), UserID)
+}
+
+// GetUserWithdrawals mocks base method.
+func (m *MockStorOrderFunc) GetUserWithdrawals(UserID string) (models.UserWithdrawList, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserWithdrawals", UserID)
+	ret0, _ := ret[0].(models.UserWithdrawList)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserWithdrawals indicates an expected call of GetUserWithdrawals.
+func (mr *MockStorOrderFuncMockRecorder) GetUserWithdrawals(UserID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserWithdrawals", reflect.TypeOf((*MockStorOrderFunc)(nil).GetUserWithdrawals), UserID)
 }
 
 // SaveNewOrder mocks base method.

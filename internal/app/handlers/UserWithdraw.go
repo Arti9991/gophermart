@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/theplant/luhn"
 	"go.uber.org/zap"
 )
 
@@ -34,34 +35,22 @@ func WithdrawOrder(hd *HandlersData) http.HandlerFunc {
 			return
 		}
 		// проверяем номер по алгоритму Луна, если отрицательно то ставим статус 422
-		// if !luhn.Valid(numberInt) {
-		// 	logger.Log.Error("Wrong number for luhn", zap.Error(err), zap.Int("number", numberInt))
-		// 	res.WriteHeader(http.StatusUnprocessableEntity)
-		// 	return
-		// }
+		if !luhn.Valid(numberInt) {
+			logger.Log.Error("Wrong number for luhn", zap.Error(err), zap.Int("number", numberInt))
+			res.WriteHeader(http.StatusUnprocessableEntity)
+			return
+		}
 		// получаем информацию о пользователе из контекста, переданного из middleware
 		UserInfo := req.Context().Value(models.CtxKey).(models.UserInfo)
 		UserID := UserInfo.UserID
 
-		// err = hd.StorUser.MinusUserBalance(WithData.Sum, UserID)
-		// if err != nil {
-		// 	if err == models.ErrorNoSuchBalance {
-		// 		logger.Log.Error("Not enough money on balance")
-		// 		res.WriteHeader(http.StatusPaymentRequired)
-		// 		return
-		// 	} else {
-		// 		logger.Log.Error("Error in MinusUserBalance", zap.Error(err))
-		// 		res.WriteHeader(http.StatusInternalServerError)
-		// 		return
-		// 	}
-		// }
 		err = hd.StorOrder.SaveWithdrawOrder(UserID, WithData.Number, WithData.Sum)
 		if err != nil {
 			if err == models.ErrorNoSuchBalance {
 				logger.Log.Error("Not enough money on balance")
 				res.WriteHeader(http.StatusPaymentRequired)
 				return
-			} else if err == models.AlreadyTakenNumber {
+			} else if err == models.ErrorAlreadyTakenNumber {
 				logger.Log.Error("Bad order number", zap.Error(err))
 				res.WriteHeader(http.StatusUnprocessableEntity)
 				return

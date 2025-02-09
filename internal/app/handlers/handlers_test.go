@@ -435,3 +435,293 @@ func TestGetOrder(t *testing.T) {
 		})
 	}
 }
+
+func TestUserWithdraw(t *testing.T) {
+	// создаём контроллер
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	// создаём объект-заглушку
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
+	// инциализация handlers data для тестов
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
+
+	type want struct {
+		statusCode int
+		err        error
+	}
+
+	tests := []struct {
+		name    string
+		userID  string
+		request string
+		body    string
+		want    want
+	}{
+		{
+			name:    "Simple request for code 500",
+			userID:  "userID",
+			request: "/api/user/balance/withdraw",
+			body:    `{"order":"137561315169","sum":2500}`,
+			want: want{
+				statusCode: 500,
+				err:        errors.New("some sql error"),
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/balance/withdraw",
+			body:    `{"order":"137561315169","sum":250}`,
+			want: want{
+				statusCode: 200,
+				err:        nil,
+			},
+		},
+		{
+			name:    "Simple request for code 402",
+			userID:  "userID",
+			request: "/api/user/balance/withdraw",
+			body:    `{"order":"137561315169","sum":2500}`,
+			want: want{
+				statusCode: 402,
+				err:        models.ErrorNoSuchBalance,
+			},
+		},
+		{
+			name:    "Simple request for code 422 already taken",
+			userID:  "userID",
+			request: "/api/user/balance/withdraw",
+			body:    `{"order":"137561315169","sum":2500}`,
+			want: want{
+				statusCode: 422,
+				err:        models.ErrorAlreadyTakenNumber,
+			},
+		},
+		{
+			name:    "Simple request for code 422 luhn",
+			userID:  "userID",
+			request: "/api/user/balance/withdraw",
+			body:    `{"order":"12345","sum":2500}`,
+			want: want{
+				statusCode: 422,
+				err:        nil,
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+
+			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
+			m2.EXPECT().
+				SaveWithdrawOrder(gomock.Any(), gomock.Any(), gomock.Any()).
+				Return(test.want.err).
+				MaxTimes(1)
+
+			request := httptest.NewRequest(http.MethodPost, test.request, bytes.NewBuffer([]byte(test.body)))
+			request.Header.Add("Content-Type", "application/json")
+
+			ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: test.userID})
+			request = request.WithContext(ctx)
+
+			w := httptest.NewRecorder()
+			h := http.HandlerFunc(WithdrawOrder(hd))
+			h(w, request)
+
+			result := w.Result()
+			assert.Equal(t, test.want.statusCode, result.StatusCode)
+
+			err := result.Body.Close()
+			require.NoError(t, err)
+		})
+	}
+}
+
+func TestGetWithrawals(t *testing.T) {
+	// создаём контроллер
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	// создаём объект-заглушку
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
+	// инциализация handlers data для тестов
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
+
+	type want struct {
+		statusCode int
+		answer     models.UserWithdrawList
+		err        error
+	}
+
+	tests := []struct {
+		name    string
+		userID  string
+		request string
+		want    want
+	}{
+		{
+			name:    "Request for code 500",
+			userID:  "userID",
+			request: "/api/user/withdrawals",
+			want: want{
+				statusCode: 500,
+				answer:     nil,
+				err:        errors.New("some sql error"),
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/withdrawals",
+			want: want{
+				statusCode: 200,
+				answer: []models.UserWithdraw{
+					{Number: "12345678903", Accrual: 0.0, LoadedTime: time.Now().Format(time.RFC3339)},
+				},
+				err: nil,
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/withdrawals",
+			want: want{
+				statusCode: 200,
+				answer: []models.UserWithdraw{
+					{Number: "12345678903", Accrual: 100.0, LoadedTime: time.Now().Format(time.RFC3339)},
+					{Number: "346436439", Accrual: 500.0, LoadedTime: time.Now().Format(time.RFC3339)},
+					{Number: "9278923470", Accrual: 10000.0, LoadedTime: time.Now().Format(time.RFC3339)},
+				},
+				err: nil,
+			},
+		},
+		{
+			name:    "Simple request for code 204",
+			userID:  "userID",
+			request: "/api/user/withdrawals",
+			want: want{
+				statusCode: 204,
+				answer:     nil,
+				err:        models.ErrorNoOrdersUser,
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+
+			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
+			m2.EXPECT().
+				GetUserWithdrawals(gomock.Any()).
+				Return(test.want.answer, test.want.err).
+				MaxTimes(1)
+
+			request := httptest.NewRequest(http.MethodGet, test.request, nil)
+
+			ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: test.userID})
+			request = request.WithContext(ctx)
+
+			w := httptest.NewRecorder()
+			h := http.HandlerFunc(GetWithrawals(hd))
+			h(w, request)
+
+			result := w.Result()
+			assert.Equal(t, test.want.statusCode, result.StatusCode)
+
+			var outBuff models.UserWithdrawList
+			json.NewDecoder(result.Body).Decode(&outBuff)
+
+			assert.Equal(t, test.want.answer, outBuff)
+
+			err := result.Body.Close()
+			require.NoError(t, err)
+		})
+	}
+}
+
+func TestGetBalance(t *testing.T) {
+	// создаём контроллер
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	// создаём объект-заглушку
+	m1 := mocks.NewMockStorUserFunc(ctrl)
+	m2 := mocks.NewMockStorOrderFunc(ctrl)
+	// инциализация handlers data для тестов
+	hd := HandlersDataInit(BaseAdr, "", m1, m2)
+
+	type want struct {
+		statusCode int
+		answer     models.BalanceData
+		err        error
+	}
+
+	tests := []struct {
+		name    string
+		userID  string
+		request string
+		want    want
+	}{
+		{
+			name:    "Request for code 500",
+			userID:  "userID",
+			request: "/api/user/balance",
+			want: want{
+				statusCode: 500,
+				answer:     models.BalanceData{},
+				err:        errors.New("some sql error"),
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/balance",
+			want: want{
+				statusCode: 200,
+				answer:     models.BalanceData{Sum: 1500.10, Withdraw: 1000},
+				err:        nil,
+			},
+		},
+		{
+			name:    "Simple request for code 200",
+			userID:  "userID",
+			request: "/api/user/balance",
+			want: want{
+				statusCode: 200,
+				answer:     models.BalanceData{Sum: 150000.10, Withdraw: 10.05},
+				err:        nil,
+			},
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+
+			// задаем режим рабоыт моков (для POST главное отсутствие ошибки)
+			m1.EXPECT().
+				GetUserBalance(gomock.Any()).
+				Return(test.want.answer, test.want.err).
+				MaxTimes(1)
+
+			request := httptest.NewRequest(http.MethodGet, test.request, nil)
+
+			ctx := context.WithValue(request.Context(), models.CtxKey, models.UserInfo{UserID: test.userID})
+			request = request.WithContext(ctx)
+
+			w := httptest.NewRecorder()
+			h := http.HandlerFunc(GetBalance(hd))
+			h(w, request)
+
+			result := w.Result()
+			assert.Equal(t, test.want.statusCode, result.StatusCode)
+
+			var outBuff models.BalanceData
+			json.NewDecoder(result.Body).Decode(&outBuff)
+
+			assert.Equal(t, test.want.answer, outBuff)
+
+			err := result.Body.Close()
+			require.NoError(t, err)
+		})
+	}
+}

@@ -20,12 +20,14 @@ var QuerryCreateUserStor = `CREATE TABLE IF NOT EXISTS users (
 	);`
 var QuerrySaveUser = `INSERT INTO users (id, user_id, login, password, sum, withdraw)
   	VALUES  (DEFAULT, $1, $2, $3, 0, 0);`
-var QuerryGetUser = `SELECT user_id, password
-	FROM users WHERE login = $1 LIMIT 1;`
+var QuerryGetUser = `SELECT user_id, password FROM users 
+	WHERE login = $1 LIMIT 1;`
 var QuerryUpdateUserSum = `UPDATE users SET sum = sum + $1
 	WHERE user_id = $2;`
 var QuerryMinusUserSum = `UPDATE users SET sum = sum - $1, withdraw = withdraw + $1
 	WHERE user_id = $2 RETURNING sum;`
+var QuerryGetUserBalance = `SELECT sum, withdraw FROM users 
+	WHERE user_id = $1 LIMIT 1;`
 
 type DBStor struct {
 	storage.StorUserFunc
@@ -128,4 +130,18 @@ func (db *DBStor) MinusUserBalance(sum float64, UserID string) error {
 		return models.ErrorNoSuchBalance
 	}
 	return tx.Commit()
+}
+
+// получение уникального идентификатора из базы для зарегистрированного пользователя
+func (db *DBStor) GetUserBalance(UserID string) (models.BalanceData, error) {
+	var BalanceData models.BalanceData
+	var err error
+
+	row := db.DB.QueryRow(QuerryGetUserBalance, UserID)
+	err = row.Scan(&BalanceData.Sum, &BalanceData.Withdraw)
+	if err != nil {
+		return BalanceData, err
+	}
+
+	return BalanceData, nil
 }

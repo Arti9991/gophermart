@@ -1,6 +1,4 @@
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:34 MSK","msg":"Logger initialyzed!","In file mode:":true}
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:34 MSK","msg":"✓ created users table!"}
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:34 MSK","msg":"✓ created orders table!"}
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:34 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
-{"level":"info","ts":"Sat, 08 Feb 2025 21:04:42 MSK","msg":"responce on request","status":200,"size":0,"duration":0.2135752}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"Logger initialyzed!","In file mode:":true}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"✓ created users table!"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"✓ created orders table!"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}

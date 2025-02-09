@@ -19,7 +19,7 @@ type UserInfo struct {
 type UserOrder struct {
 	Number     string  `json:"number"`
 	Status     string  `json:"status"`
-	Accrual    float64 `json:"accrual"`
+	Accrual    float64 `json:"accrual,omitempty"`
 	LoadedTime string  `json:"uploaded_at"`
 }
 
@@ -36,6 +36,19 @@ type OrderAns struct {
 type WithData struct {
 	Number string  `json:"order"`
 	Sum    float64 `json:"sum"`
+}
+
+type UserWithdraw struct {
+	Number     string  `json:"order"`
+	Accrual    float64 `json:"accrual,omitempty"`
+	LoadedTime string  `json:"uploaded_at"`
+}
+
+type UserWithdrawList []UserWithdraw
+
+type BalanceData struct {
+	Sum      float64 `json:"current"`
+	Withdraw float64 `json:"withdrawn"`
 }
 
 func RandomString(n int) string {
@@ -55,7 +68,7 @@ var ErrorUserAlreadyHas = errors.New("user already downloaded this number")
 var ErrorAnotherUserHas = errors.New("another user downloaded this number")
 var ErrorNoOrdersUser = errors.New("current user has no orders")
 var ErrorNoSuchBalance = errors.New("not enough points on user balance")
-var AlreadyTakenNumber = errors.New("someone already downloaded this number")
+var ErrorAlreadyTakenNumber = errors.New("someone already downloaded this number")
 
 type KeyContext string
 

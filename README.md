@@ -45,6 +45,6 @@ curl -v -X POST -H "Content-Type: text/plain" --cookie "userID=<cookie>" -d 1234
 ```
 curl -v -X GET --cookie "userID=<cookie>" http://localhost:8082/api/user/orders
 ```
-
+Запрос на списание средств с накопительного счета пользователя
 ```
 curl -v -X POST -H "Content-Type: application/json" --cookie "userID=<cookie>" -d '{"order":<order_num>,"sum": 500}' http://localhost:8082/api/user/balance/withdraw

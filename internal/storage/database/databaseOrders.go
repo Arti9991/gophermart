@@ -28,12 +28,14 @@ var QuerrySaveNewOrder = `INSERT INTO orders (id, user_id, number, status, accru
 var QuerryGetUserForNumber = `SELECT user_id FROM orders 
 	WHERE number = $1 LIMIT 1;`
 var QuerryGetUserOrders = `SELECT number, status, accrual, uploaded_at FROM orders 
-	WHERE user_id = $1;`
+	WHERE user_id = $1 AND status != 'WITHDRAW' ORDER BY uploaded_at DESC;`
 var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
 	WHERE status = 'NEW' OR status = 'PROCESSING';`
 var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
 var QuerrySaveWithdrawOrder = `INSERT INTO orders (id, user_id, number, status, accrual, uploaded_at)
   	VALUES  (DEFAULT, $1, $2, 'WITHDRAW', $3, $4);`
+var QuerryGetUserWithdraw = `SELECT number, accrual, uploaded_at FROM orders 
+	WHERE user_id = $1 AND status = 'WITHDRAW' ORDER BY uploaded_at DESC;`
 
 // инициализация хранилища и создание/подключение к таблице
 func (db *DBStor) DBOrdersInit() error {
@@ -121,7 +123,7 @@ func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 	return ordersList, nil
 }
 
-// функция для получения из БД всех заказов со статусом NEW или PROCESSING
+// функция для циклического получения из БД всех заказов со статусом NEW или PROCESSING
 // и последующей передаче их в канал
 func (db *DBStor) GetAccurOrders() chan models.OrderAns {
 	numCh := make(chan models.OrderAns)
@@ -192,7 +194,8 @@ func (db *DBStor) SetAccurOrders(inp chan models.OrderAns) {
 
 }
 
-// функция для сохранения нового заказа пользователя в базу
+// функция транзакционного списания средств с баланса пользователя
+// и транзакционное сохранение нового заказа в базу с соответствующей меткой
 func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) error {
 	var userBalance float64
 	uploaded := time.Now()
@@ -214,7 +217,7 @@ func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) e
 	_, err = tx2.Exec(QuerrySaveWithdrawOrder, UserID, number, sum, uploaded)
 	if err != nil {
 		if strings.Contains(err.Error(), pgerrcode.UniqueViolation) {
-			return models.AlreadyTakenNumber
+			return models.ErrorAlreadyTakenNumber
 		} else {
 			return err
 		}
@@ -224,6 +227,7 @@ func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) e
 	if err != nil {
 		return err
 	}
+	// если баланс пользователя после списания стал отрицательным, откатываем транзакции
 	if userBalance < 0 {
 		fmt.Println(userBalance)
 		return models.ErrorNoSuchBalance
@@ -237,4 +241,34 @@ func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) e
 		return err2
 	}
 	return nil
+}
+
+// функция для получения информации о всех заказах пользователя из базы
+func (db *DBStor) GetUserWithdrawals(UserID string) (models.UserWithdrawList, error) {
+	var err error
+	var withdrawList models.UserWithdrawList
+	var OpTime time.Time
+	rows, err := db.DB.Query(QuerryGetUserWithdraw, UserID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var withdraw models.UserWithdraw
+		err := rows.Scan(&withdraw.Number, &withdraw.Accrual, &OpTime)
+		if err != nil {
+			return nil, err
+		}
+		withdraw.LoadedTime = OpTime.Format(time.RFC3339)
+		withdrawList = append(withdrawList, withdraw)
+	}
+	if err := rows.Err(); err != nil { // (5)
+		return nil, err
+	}
+
+	if len(withdrawList) == 0 {
+		return nil, models.ErrorNoOrdersUser
+	}
+	return withdrawList, nil
 }

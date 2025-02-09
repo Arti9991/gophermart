@@ -6,6 +6,7 @@ type StorUserFunc interface {
 	SaveUser(Login string, Password string, UserID string) error
 	GetUserID(Login string) (string, string, error)
 	MinusUserBalance(sum float64, UserID string) error
+	GetUserBalance(UserID string) (models.BalanceData, error)
 }
 
 type StorOrderFunc interface {
@@ -14,4 +15,5 @@ type StorOrderFunc interface {
 	GetAccurOrders() chan models.OrderAns
 	SetAccurOrders(inp chan models.OrderAns)
 	SaveWithdrawOrder(UserID string, number string, sum float64) error
+	GetUserWithdrawals(UserID string) (models.UserWithdrawList, error)
 }
