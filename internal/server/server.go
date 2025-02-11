@@ -61,7 +61,7 @@ func InitServer() Server {
 func (s *Server) MainRouter() chi.Router {
 
 	rt := chi.NewRouter()
-	rt.Use(middleware.MiddlewareLogger, middleware.MiddlewareAuth)
+	rt.Use(middleware.MiddlewareLogger, middleware.MiddlewareAuth, middleware.MiddlewareGzip)
 	rt.Route("/api/user/", func(rt chi.Router) {
 		rt.Post("/register", handlers.UserRegister(s.hd))
 		rt.Post("/login", handlers.UserLogin(s.hd))

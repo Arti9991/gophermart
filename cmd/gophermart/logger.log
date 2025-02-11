@@ -2,3 +2,16 @@
 {"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"✓ created users table!"}
 {"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"✓ created orders table!"}
 {"level":"info","ts":"Sun, 09 Feb 2025 18:17:31 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:34 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:17:34 MSK","msg":"responce on request","status":200,"size":35,"duration":0.0350069}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:18:20 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:18:20 MSK","msg":"responce on request","status":200,"size":35,"duration":0}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:33 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:33 MSK","msg":"responce on request","status":200,"size":187,"duration":0.0030017}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:46 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:46 MSK","msg":"responce on request","status":200,"size":164,"duration":0}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:57 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:19:57 MSK","msg":"responce on request","status":200,"size":35,"duration":0.0010003}
+{"level":"error","ts":"Sun, 09 Feb 2025 18:32:39 MSK","msg":"Bad order number","error":"someone already downloaded this number"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:32:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Sun, 09 Feb 2025 18:32:39 MSK","msg":"responce on request","status":422,"size":0,"duration":0.0400074}
