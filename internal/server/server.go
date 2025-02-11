@@ -97,6 +97,9 @@ func RunServer() error {
 	return nil
 }
 
+// TODO: пересмотреть логику взаимодействия горутин
+// возможно стоит пересмотреть самоу логику функций, их наполнение
+// и области их запуска
 // запуск всех ассинхронных функций связанных с accrual
 func AccrRun(server *Server) {
 	server.hd.StorOrder.GetAccurOrders(server.AccrServ.RequestPool)
