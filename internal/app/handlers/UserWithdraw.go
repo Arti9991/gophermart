@@ -47,7 +47,7 @@ func WithdrawOrder(hd *HandlersData) http.HandlerFunc {
 		err = hd.StorOrder.SaveWithdrawOrder(UserID, WithData.Number, WithData.Sum)
 		if err != nil {
 			if err == models.ErrorNoSuchBalance {
-				logger.Log.Error("Not enough money on balance")
+				logger.Log.Info("Not enough money on balance")
 				res.WriteHeader(http.StatusPaymentRequired)
 				return
 			} else if err == models.ErrorAlreadyTakenNumber {

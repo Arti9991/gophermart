@@ -22,7 +22,7 @@ type Claims struct {
 const TOKEN_EXP = time.Hour * 3
 const SECRET_KEY = "supersecretkey"
 
-var UserSession = "userID"
+var UserSession = "Token"
 
 func MiddlewareAuth(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -31,6 +31,7 @@ func MiddlewareAuth(h http.Handler) http.Handler {
 
 		cookie, err := req.Cookie(UserSession)
 		if err != nil {
+			logger.Log.Info("Error in cookie", zap.Error(err))
 			UserExist = false
 		} else {
 			UserID, err = GetUserID(cookie.Value)
