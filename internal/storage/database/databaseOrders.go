@@ -125,8 +125,7 @@ func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 
 // функция для циклического получения из БД всех заказов со статусом NEW или PROCESSING
 // и последующей передаче их в канал
-func (db *DBStor) GetAccurOrders() chan models.OrderAns {
-	numCh := make(chan models.OrderAns)
+func (db *DBStor) GetAccurOrders(numCh chan models.OrderAns) {
 	go func() {
 		for {
 			// формируется querry запрос
@@ -136,19 +135,27 @@ func (db *DBStor) GetAccurOrders() chan models.OrderAns {
 				rows.Close()
 				return
 			}
+
 			for rows.Next() {
-				// получение данных из ряда
-				var AnsOrd models.OrderAns
-				err := rows.Scan(&AnsOrd.Number, &AnsOrd.StatusOld, &AnsOrd.UserID)
-				if err != nil {
-					logger.Log.Error("Error in Scan Query", zap.Error(err))
-					rows.Close()
-					continue
+				fmt.Println(cap(numCh))
+				for range cap(numCh) {
+					fmt.Println(rows)
+					// получение данных из ряда
+					var AnsOrd models.OrderAns
+					err := rows.Scan(&AnsOrd.Number, &AnsOrd.StatusOld, &AnsOrd.UserID)
+					if err != nil {
+						logger.Log.Error("Error in Scan Query", zap.Error(err))
+						rows.Close()
+						continue
+					}
+					// передача данных в канал для отправки к Accural
+					numCh <- AnsOrd
+					if !rows.Next() {
+						break
+					}
 				}
-				// передача данных в канал для отправки к Accural
-				numCh <- AnsOrd
 				// ожидание флага о записи обновленных данных
-				<-db.flagCh
+				db.Wg.Wait()
 			}
 			if err := rows.Err(); err != nil {
 				logger.Log.Error("Error in rows", zap.Error(err))
@@ -158,39 +165,29 @@ func (db *DBStor) GetAccurOrders() chan models.OrderAns {
 			rows.Close()
 		}
 	}()
-
-	return numCh
 }
 
 // функция для записи обновленных данных в базу в таблицы users и orders
-func (db *DBStor) SetAccurOrders(inp chan models.OrderAns) {
-	go func() {
-		for {
-			select {
-			case toWrite := <-inp:
-				// проверяем обновился ли статус заказа
-				if toWrite.Status != toWrite.StatusOld {
-					// для нового статуса записываем новые данные в базу о заказах
-					_, err := db.DB.Exec(QuerrySaveAccurOrders, toWrite.Status, toWrite.Accrual, toWrite.Number)
-					if err != nil {
-						logger.Log.Error("Error in rows", zap.Error(err))
-					}
-					// уведомляем стартовую горутину об успешной операции записи
-					db.flagCh <- struct{}{}
-					// если статус операции успешеный, прибавляеми сумму баллов на баланс пользователя
-					if toWrite.Status == "PROCESSED" {
-						// функция для обнловления баланса пользователя с прибавлением полученных баллов
-						err := db.AddUserBalance(toWrite.Accrual, toWrite.UserID)
-						if err != nil {
-							logger.Log.Error("Error in AddUserBalance", zap.Error(err))
-						}
-					}
-				}
-			default:
-				continue
+func (db *DBStor) SetAccurOrders(toWrite models.OrderAns) {
+
+	// проверяем обновился ли статус заказа
+	if toWrite.Status != toWrite.StatusOld {
+		// для нового статуса записываем новые данные в базу о заказах
+		_, err := db.DB.Exec(QuerrySaveAccurOrders, toWrite.Status, toWrite.Accrual, toWrite.Number)
+		if err != nil {
+			logger.Log.Error("Error in rows", zap.Error(err))
+		}
+		// уведомляем стартовую горутину об успешной операции записи
+		db.Wg.Done()
+		// если статус операции успешеный, прибавляеми сумму баллов на баланс пользователя
+		if toWrite.Status == "PROCESSED" {
+			// функция для обнловления баланса пользователя с прибавлением полученных баллов
+			err := db.AddUserBalance(toWrite.Accrual, toWrite.UserID)
+			if err != nil {
+				logger.Log.Error("Error in AddUserBalance", zap.Error(err))
 			}
 		}
-	}()
+	}
 
 }
 

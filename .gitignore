@@ -6,8 +6,8 @@
 *.dylib
 
 # # Logs and config files
-# *.yaml
-# *.log
+*.yaml
+*.log
 
 # Test binary, built with `go test -c`
 *.test

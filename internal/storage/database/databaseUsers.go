@@ -6,6 +6,7 @@ import (
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"gophermart/internal/storage"
+	"sync"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
@@ -34,11 +35,11 @@ type DBStor struct {
 	storage.StorOrderFunc
 	DB     *sql.DB
 	DBInfo string
-	flagCh chan struct{}
+	Wg     *sync.WaitGroup
 }
 
 // инициализация хранилища и создание/подключение к таблице
-func DBUserInit(DBInfo string) (*DBStor, error) {
+func DBInit(DBInfo string) (*DBStor, error) {
 	var db DBStor
 	var err error
 
@@ -57,7 +58,7 @@ func DBUserInit(DBInfo string) (*DBStor, error) {
 	if err != nil {
 		return &DBStor{}, err
 	}
-	db.flagCh = make(chan struct{})
+	db.Wg = &sync.WaitGroup{}
 	// go func() {
 	// 	db.flagCh <- struct{}{}
 	// }()

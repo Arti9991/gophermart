@@ -6,6 +6,7 @@ import (
 	"gophermart/internal/app/middleware"
 	"gophermart/internal/config"
 	"gophermart/internal/logger"
+	"gophermart/internal/models"
 	"gophermart/internal/storage/database"
 	"net/http"
 	"time"
@@ -40,7 +41,7 @@ func InitServer() Server {
 	)
 	// инциализация и получение данных для конфиогурации сервера
 	server.Config = config.InitConf()
-	server.DataBase, err = database.DBUserInit(server.Config.DBAdr)
+	server.DataBase, err = database.DBInit(server.Config.DBAdr)
 	if err != nil {
 		logger.Log.Fatal("Error in initialyzed database for users", zap.Error(err))
 	}
@@ -52,7 +53,7 @@ func InitServer() Server {
 	// инциализация структуры с данными для хэндлеров
 	server.hd = handlers.HandlersDataInit(server.Config.HostAddr, server.Config.AccurAddr, server.DataBase, server.DataBase)
 	// инциализация строктуры для accrual
-	server.AccrServ = accrual.AccrualDataInit(server.Config.AccurAddr)
+	server.AccrServ = accrual.AccrualDataInit(server.Config.AccurAddr, 5)
 
 	return server
 }
@@ -86,7 +87,7 @@ func RunServer() error {
 		zap.String("Accur address:", server.Config.AccurAddr),
 	)
 
-	AccrRun(&server)
+	go AccrRun(&server)
 
 	err := http.ListenAndServe(server.Config.HostAddr, server.MainRouter())
 	if err != nil {
@@ -98,7 +99,12 @@ func RunServer() error {
 
 // запуск всех ассинхронных функций связанных с accrual
 func AccrRun(server *Server) {
-	numCh := server.hd.StorOrder.GetAccurOrders()
-	orderUp := server.AccrServ.LoadNumberToApi(numCh)
-	server.hd.StorOrder.SetAccurOrders(orderUp)
+	server.hd.StorOrder.GetAccurOrders(server.AccrServ.RequestPool)
+	for outBuf := range server.AccrServ.RequestPool {
+		server.DataBase.Wg.Add(1)
+		go func(outBuf models.OrderAns) {
+			respBuff := server.AccrServ.LoadNumberToApi(outBuf)
+			server.hd.StorOrder.SetAccurOrders(respBuff)
+		}(outBuf)
+	}
 }

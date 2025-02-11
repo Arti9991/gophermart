@@ -53,7 +53,7 @@ func testRequest(t *testing.T, ts *httptest.Server,
 func TestRouter(t *testing.T) {
 	serv := InitServer()
 	ts := httptest.NewServer(serv.MainRouter())
-	AccrRun(&serv)
+	go AccrRun(&serv)
 	defer ts.Close()
 
 	type want struct {
@@ -89,6 +89,13 @@ func TestRouter(t *testing.T) {
 				"1277617534",
 				"138503636",
 				"142434877838532",
+				"710535703077780",
+				"7682321",
+				"6234728",
+				"664101141102",
+				"742854854",
+				"6367437",
+				"88130601670318",
 			},
 			UserOrderWithdraw: "605886811",
 			want: want{
@@ -103,7 +110,7 @@ func TestRouter(t *testing.T) {
 		//locate := make([]string, 0)
 		//for i := range len(test.bodys) {
 
-		// запрос на регистрацию (если зарегистрирован, то цже на логин)
+		// запрос на регистрацию (если зарегистрирован, то уже на логин)
 		resp := testRequestRegistration(t, ts, test.requestRegistr, bytes.NewBuffer([]byte(test.UserInfo)))
 		defer resp.Body.Close()
 		if resp.StatusCode == http.StatusConflict {
