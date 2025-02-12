@@ -31,7 +31,7 @@ type Server struct {
 func InitServer() Server {
 	var server Server
 	var err error
-	const numJobs = 4
+	const numJobs = 8
 	// установка сида для случайных чисел
 	rand.Seed(uint64(time.Now().UnixNano()))
 	// инциализация логгера
