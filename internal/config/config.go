@@ -11,7 +11,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var FileConfig = true
+var FileConfig = false
 var ConfigPath = "Config.yaml"
 
 type Config struct {

@@ -114,6 +114,7 @@ func TestRegistration(t *testing.T) {
 			result := w.Result()
 			assert.Equal(t, test.want.statusCode, result.StatusCode)
 
+			result.Body.Close()
 		})
 	}
 }
@@ -217,6 +218,7 @@ func TestLogin(t *testing.T) {
 			result := w.Result()
 			assert.Equal(t, test.want.statusCode, result.StatusCode)
 
+			result.Body.Close()
 		})
 	}
 }
@@ -330,6 +332,7 @@ func TestPostOrder(t *testing.T) {
 			result := w.Result()
 			assert.Equal(t, test.want.statusCode, result.StatusCode)
 
+			result.Body.Close()
 		})
 	}
 }

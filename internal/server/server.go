@@ -99,6 +99,6 @@ func RunServer() error {
 // запуск всех ассинхронных функций связанных с accrual
 func AccrRun(server *Server) {
 	numCh := server.hd.StorOrder.GetAccurOrders()
-	orderUp := server.AccrServ.LoadNumberToApi(numCh)
+	orderUp := server.AccrServ.LoadNumberToAPI(numCh)
 	server.hd.StorOrder.SetAccurOrders(orderUp)
 }

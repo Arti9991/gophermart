@@ -3,13 +3,13 @@ package server
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"gophermart/internal/models"
 	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -105,7 +105,6 @@ func TestRouter(t *testing.T) {
 
 		// запрос на регистрацию (если зарегистрирован, то цже на логин)
 		resp := testRequestRegistration(t, ts, test.requestRegistr, bytes.NewBuffer([]byte(test.UserInfo)))
-		defer resp.Body.Close()
 		if resp.StatusCode == http.StatusConflict {
 			resp = testRequestRegistration(t, ts, test.requestLogin, bytes.NewBuffer([]byte(test.UserInfo)))
 		}
@@ -113,12 +112,15 @@ func TestRouter(t *testing.T) {
 		// проверяем наличие cookie
 		assert.True(t, len(resp.Cookies()) > 0)
 		tokenCookie := resp.Cookies()[0]
+		resp.Body.Close()
 		// запрос на размещение заказов с куки предыдущего запроса
 		for _, order := range test.orders {
 			header := map[string]string{"Content-Type": "text/plain"}
 			resp := testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestOrder, strings.NewReader(order))
 			assert.True(t, (resp.StatusCode == test.want.statusCodeAccepted || resp.StatusCode == test.want.statusCodeOK))
+			resp.Body.Close()
 		}
+		time.Sleep(1000 * time.Microsecond)
 		// запрос на получение баланса пользователя
 		resp = testRequest(t, ts, http.MethodGet, nil, tokenCookie, test.requestCheckBalance, nil)
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)
@@ -126,8 +128,7 @@ func TestRouter(t *testing.T) {
 
 		var outBuff1 models.BalanceData
 		json.NewDecoder(resp.Body).Decode(&outBuff1)
-		fmt.Println(outBuff1)
-
+		resp.Body.Close()
 		// запрос на списание средств больших чем баланс пользователя (должен не списать)
 		var WithdrawUser models.WithData
 		WithdrawUser.Number = test.UserOrderWithdraw
@@ -137,14 +138,14 @@ func TestRouter(t *testing.T) {
 		header := map[string]string{"Content-Type": "application/json"}
 		resp = testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestWutdraw, bytes.NewBuffer(reqBuff))
 		assert.Equal(t, test.want.statusCodePayment, resp.StatusCode)
-
+		resp.Body.Close()
 		// запрос на списание средств меньших чем баланс пользователя (должен списать и записать заказ на списание)
 		WithdrawUser.Sum = outBuff1.Sum - 20
 		reqBuff, err = json.Marshal(&WithdrawUser)
 		require.NoError(t, err)
 		resp = testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestWutdraw, bytes.NewBuffer(reqBuff))
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)
-
+		resp.Body.Close()
 		// запрос на проверку баланса пользователя
 		resp = testRequest(t, ts, http.MethodGet, nil, tokenCookie, test.requestCheckBalance, nil)
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)
@@ -152,8 +153,8 @@ func TestRouter(t *testing.T) {
 
 		var outBuff2 models.BalanceData
 		json.NewDecoder(resp.Body).Decode(&outBuff2)
-		fmt.Println(outBuff2)
 		// сравниваем баланс с разнцией в запроса на списание
 		assert.Equal(t, 20.00, outBuff2.Sum)
+		resp.Body.Close()
 	}
 }

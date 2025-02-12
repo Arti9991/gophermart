@@ -21,7 +21,7 @@ func AccrualDataInit(AccrualAddr string) *AccrualData {
 }
 
 // функция периодически отправляющая данные к сервису расчета количеств баллов
-func (AccDt *AccrualData) LoadNumberToApi(numCh <-chan models.OrderAns) chan models.OrderAns {
+func (AccDt *AccrualData) LoadNumberToAPI(numCh <-chan models.OrderAns) chan models.OrderAns {
 	outCh := make(chan models.OrderAns)
 	go func() {
 		for {
