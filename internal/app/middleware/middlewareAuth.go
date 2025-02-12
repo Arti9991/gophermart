@@ -19,8 +19,8 @@ type Claims struct {
 	UserID string
 }
 
-const TOKENEXP = time.Hour * 3
-const SECRETKEY = "supersecretkey"
+const TOKEN_EXP = time.Hour * 3
+const SECRET_KEY = "supersecretkey"
 
 var UserSession = "Token"
 
@@ -70,14 +70,14 @@ func BuildJWTString(UserID string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		RegisteredClaims: jwt.RegisteredClaims{
 			// когда создан токен
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(TOKENEXP)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(TOKEN_EXP)),
 		},
 		// собственное утверждение
 		UserID: UserID,
 	})
 
 	// создаём строку токена
-	tokenString, err := token.SignedString([]byte(SECRETKEY))
+	tokenString, err := token.SignedString([]byte(SECRET_KEY))
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func GetUserID(tokenString string) (string, error) {
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, claims,
 		func(t *jwt.Token) (interface{}, error) {
-			return []byte(SECRETKEY), nil
+			return []byte(SECRET_KEY), nil
 		})
 	if err != nil {
 		return "", err
