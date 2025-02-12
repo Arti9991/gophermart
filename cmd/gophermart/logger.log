@@ -1,59 +1,664 @@
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:27 MSK","msg":"Logger initialyzed!","In file mode:":true}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:27 MSK","msg":"✓ created users table!"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:27 MSK","msg":"✓ created orders table!"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:27 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"responce on request","status":200,"size":23,"duration":0.1546844}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:29 MSK","msg":"responce on request","status":202,"size":0,"duration":0.002189}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:30 MSK","msg":"responce on request","status":200,"size":105,"duration":0.0015966}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:30 MSK","msg":"responce on request","status":200,"size":32,"duration":0.0005094}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:30 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.1466261}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":37,"duration":0.0005115}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":103,"duration":0.001505}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005089}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005093}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"User do not exist","path":"/api/user/orders"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005296}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"User do not exist","path":"/api/user/orders"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005122}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005085}
-{"level":"error","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Wrong number for luhn","number":12345678902}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"User already has that number","number":545071425,"UserID":"JCbyOFRXSopEoTRu"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0026048}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":81,"duration":0.0005094}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Client has gzip header"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005092}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"Another user has that number","number":545071425}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
-{"level":"info","ts":"Wed, 12 Feb 2025 20:11:31 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005092}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:26:59 MSK","msg":"Logger initialyzed!","In file mode:":true}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:26:59 MSK","msg":"✓ created users table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:26:59 MSK","msg":"✓ created orders table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:26:59 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0351485}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:03 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005144}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":103,"duration":0.0015054}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":32,"duration":0.0005072}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0394868}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":36,"duration":0.0005129}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":102,"duration":0.0010193}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":23,"duration":0.000509}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010209}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005121}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":401,"size":0,"duration":0.00051}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005091}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":422,"size":0,"duration":0.00051}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005118}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"User already has that number","number":526302062,"UserID":"mcdvnmUMgicULgwS"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0025072}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":81,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005102}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"Another user has that number","number":526302062}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:04 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005106}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0065067}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:22 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0013214}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":109,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":23,"duration":0.1519793}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":36,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":101,"duration":0.0005099}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005097}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005078}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005082}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005093}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"User already has that number","number":76488709,"UserID":"NSxGNyYMDxYSiAIm"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005104}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":80,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005123}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"Another user has that number","number":76488709}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:23 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005041}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010341}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:24 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:25 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:25 MSK","msg":"responce on request","status":200,"size":105,"duration":0.0005143}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:25 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:25 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:25 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":23,"duration":0.1399435}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":37,"duration":0.000519}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":102,"duration":0.0010377}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005349}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010302}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":401,"size":0,"duration":0.00051}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005213}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005151}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"User already has that number","number":620054,"UserID":"HQwRKraWeRGXzTvU"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0020611}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":78,"duration":0.0005082}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0016344}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"Another user has that number","number":620054}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:26 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0010332}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010316}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:27 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":102,"duration":0.0005118}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":32,"duration":0.000997}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0405152}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":37,"duration":0.0005118}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":100,"duration":0.0005116}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005119}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005085}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005071}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":401,"size":0,"duration":0.000529}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005097}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":422,"size":0,"duration":0.0005127}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":202,"size":0,"duration":0.000508}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"User already has that number","number":734765787,"UserID":"dPQnMcnHtoaQcayW"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005097}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":81,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005087}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"Another user has that number","number":734765787}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:28 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005089}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0050175}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:29 MSK","msg":"responce on request","status":202,"size":0,"duration":0.000509}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":101,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":23,"duration":0.1475875}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":37,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":100,"duration":0.0005091}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005126}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005094}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005144}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005102}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005116}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"User already has that number","number":34366138,"UserID":"tlOUoVDhesmBGvQB"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005097}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":80,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010173}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"Another user has that number","number":34366138}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:30 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005099}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0009955}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:31 MSK","msg":"responce on request","status":202,"size":0,"duration":0.00051}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":106,"duration":0.0005111}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":23,"duration":0.146799}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":37,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":100,"duration":0.0005083}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005087}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005117}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005833}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0012902}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"User already has that number","number":2277231805,"UserID":"HAOOQZhTjxFylrNv"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005109}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":82,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005092}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"Another user has that number","number":2277231805}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:32 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0009963}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0055064}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:34 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0009998}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":105,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0415179}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":36,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":99,"duration":0.0005154}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010335}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010426}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005393}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010378}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005162}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"User already has that number","number":241638162453,"UserID":"ylKZVCcdOpIWVuSU"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005258}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":84,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0015627}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"Another user has that number","number":241638162453}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:35 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005215}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0055064}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:36 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005091}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":110,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":32,"duration":0.0005164}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0469674}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":37,"duration":0.0010003}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":102,"duration":0.001}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":23,"duration":0.000513}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0015063}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005103}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005095}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"User already has that number","number":560405011,"UserID":"DUsfHogCPBlPLwxb"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005108}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":81,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010191}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"Another user has that number","number":560405011}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:37 MSK","msg":"responce on request","status":409,"size":0,"duration":0.000513}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0045067}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:38 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":108,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0424015}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":37,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":99,"duration":0.000509}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005189}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010289}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005165}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010336}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":202,"size":0,"duration":0.000521}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"User already has that number","number":468607784104,"UserID":"pzNXWesSwIVOyIDR"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005248}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":84,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0020668}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"Another user has that number","number":468607784104}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:39 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005212}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0055063}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:40 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005141}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:41 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:41 MSK","msg":"responce on request","status":200,"size":109,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":32,"duration":0.0005118}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0399032}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":35,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":103,"duration":0.0010182}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010305}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005217}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005189}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":401,"size":0,"duration":0.000519}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005153}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005163}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"User already has that number","number":352002448,"UserID":"EqFCloSzWBASkqEf"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005309}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":81,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005166}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"Another user has that number","number":352002448}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:42 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005195}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0055063}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:43 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005092}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":108,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":32,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":23,"duration":0.042515}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":36,"duration":0.0005144}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":103,"duration":0.0005099}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005092}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0041409}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005125}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005225}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":202,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"User already has that number","number":863381,"UserID":"uMyRnfnCtzouTrzS"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0025065}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":78,"duration":0.0009997}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":200,"size":23,"duration":0.002046}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"Another user has that number","number":863381}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:44 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0165098}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"responce on request","status":200,"size":23,"duration":0.005507}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:45 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005096}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:46 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:46 MSK","msg":"responce on request","status":200,"size":104,"duration":0.00051}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:46 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:46 MSK","msg":"responce on request","status":200,"size":32,"duration":0.0009946}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:46 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance/withdraw","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":23,"duration":0.147076}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/balance","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":37,"duration":0.0005138}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/withdrawals","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":101,"duration":0.0005115}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010207}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/login","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005098}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":401,"size":0,"duration":0.0005111}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"User do not exist","path":"/api/user/orders"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":401,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0010216}
+{"level":"error","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Wrong number for luhn","number":12345678902}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":422,"size":0,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":202,"size":0,"duration":0.0005199}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"User already has that number","number":738344,"UserID":"naNHIZztlPWshoNx"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":0,"duration":0.0005185}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"GET"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":78,"duration":0}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Error in cookie","error":"http: named cookie not present"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Client has gzip header"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/register","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":200,"size":23,"duration":0.0005288}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"Another user has that number","number":738344}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"got incoming HTTP request","URI":"/api/user/orders","method":"POST"}
+{"level":"info","ts":"Wed, 12 Feb 2025 20:27:47 MSK","msg":"responce on request","status":409,"size":0,"duration":0.0005143}
