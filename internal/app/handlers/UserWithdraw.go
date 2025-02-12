@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/theplant/luhn"
 	"go.uber.org/zap"
 )
 
@@ -34,12 +33,12 @@ func WithdrawOrder(hd *HandlersData) http.HandlerFunc {
 			res.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		// проверяем номер по алгоритму Луна, если отрицательно то ставим статус 422
-		if !luhn.Valid(numberInt) {
-			logger.Log.Error("Wrong number for luhn", zap.Error(err), zap.Int("number", numberInt))
-			res.WriteHeader(http.StatusUnprocessableEntity)
-			return
-		}
+		// // проверяем номер по алгоритму Луна, если отрицательно то ставим статус 422
+		// if !luhn.Valid(numberInt) {
+		// 	logger.Log.Error("Wrong number for luhn", zap.Error(err), zap.Int("number", numberInt))
+		// 	res.WriteHeader(http.StatusUnprocessableEntity)
+		// 	return
+		// }
 		// получаем информацию о пользователе из контекста, переданного из middleware
 		UserInfo := req.Context().Value(models.CtxKey).(models.UserInfo)
 		UserID := UserInfo.UserID

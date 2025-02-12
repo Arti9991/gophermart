@@ -3,6 +3,7 @@ package database
 import (
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
+	"math"
 	"strings"
 	"time"
 
@@ -246,6 +247,7 @@ func (db *DBStor) GetUserWithdrawals(UserID string) (models.UserWithdrawList, er
 	var err error
 	var withdrawList models.UserWithdrawList
 	var OpTime time.Time
+	var AccBig float64
 	rows, err := db.DB.Query(QuerryGetUserWithdraw, UserID)
 	if err != nil {
 		return nil, err
@@ -254,10 +256,11 @@ func (db *DBStor) GetUserWithdrawals(UserID string) (models.UserWithdrawList, er
 
 	for rows.Next() {
 		var withdraw models.UserWithdraw
-		err := rows.Scan(&withdraw.Number, &withdraw.Accrual, &OpTime)
+		err := rows.Scan(&withdraw.Number, &AccBig, &OpTime)
 		if err != nil {
 			return nil, err
 		}
+		withdraw.Accrual = math.Round(AccBig*100) / 100
 		withdraw.LoadedTime = OpTime.Format(time.RFC3339)
 		withdrawList = append(withdrawList, withdraw)
 	}
