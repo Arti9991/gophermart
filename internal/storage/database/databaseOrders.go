@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"strings"
@@ -229,7 +228,6 @@ func (db *DBStor) SaveWithdrawOrder(UserID string, number string, sum float64) e
 	}
 	// если баланс пользователя после списания стал отрицательным, откатываем транзакции
 	if userBalance < 0 {
-		fmt.Println(userBalance)
 		return models.ErrorNoSuchBalance
 	}
 	err1 := tx1.Commit()

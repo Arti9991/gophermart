@@ -107,7 +107,7 @@ func NewGoodsTypes(AccAddr string) ([]GoodType, error) {
 
 // создаем список возможных заказов, которые доступны в accrual
 func PostNumberToApi(AccAddr string, n int, Types []GoodType) error {
-	file, err := os.OpenFile("orders_numbers.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	file, err := os.OpenFile("orders_numbers.csv", os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		fmt.Print("ERROR IN FILE OPEN")
 	}
