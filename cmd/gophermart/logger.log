@@ -1,4 +1,4 @@
-{"level":"info","ts":"Tue, 11 Feb 2025 13:47:39 MSK","msg":"Logger initialyzed!","In file mode:":true}
-{"level":"info","ts":"Tue, 11 Feb 2025 13:47:39 MSK","msg":"✓ created users table!"}
-{"level":"info","ts":"Tue, 11 Feb 2025 13:47:39 MSK","msg":"✓ created orders table!"}
-{"level":"info","ts":"Tue, 11 Feb 2025 13:47:39 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
+{"level":"info","ts":"Wed, 12 Feb 2025 16:29:35 MSK","msg":"Logger initialyzed!","In file mode:":true}
+{"level":"info","ts":"Wed, 12 Feb 2025 16:29:35 MSK","msg":"✓ created users table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 16:29:35 MSK","msg":"✓ created orders table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 16:29:35 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083"}

@@ -57,3 +57,6 @@ curl -v -X GET --cookie "Token=<cookie>" http://localhost:8082/api/user/balance
 ```
 curl -v -X GET --cookie "Token=<cookie>" http://localhost:8082/api/user/withdrawals
 ```
+
+./gophermarttest.exe --test.v --test.run=^TestGophermart$ --gophermart-binary-path=cmd/gophermart/gophermart.exe --gophermart-host=localhost --gophermart-port=8082 --gophermart-database-uri="host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable" --accrual-binary-path=cmd/accrual/accrual_windows_amd64.exe -accrual-host=localhost -accrual-port=8083 -accrual-database-uri="host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable"
+

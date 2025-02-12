@@ -41,7 +41,7 @@ func InitConf() Config {
 	flag.StringVar(&conf.AccurAddr, "r", conf.AccurAddr, "another api address")
 	flag.Parse()
 
-	CreateConfig(ConfigPath, conf)
+	//CreateConfig(ConfigPath, conf)
 
 	return conf
 }
