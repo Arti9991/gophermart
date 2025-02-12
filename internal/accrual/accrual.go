@@ -17,7 +17,7 @@ type AccrualData struct {
 }
 
 func AccrualDataInit(AccrualAddr string) *AccrualData {
-	return &AccrualData{AccAddr: AccrualAddr + "api/orders/", RetryTime: 0}
+	return &AccrualData{AccAddr: AccrualAddr + "/api/orders/", RetryTime: 0}
 }
 
 // функция периодически отправляющая данные к сервису расчета количеств баллов
