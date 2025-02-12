@@ -23,7 +23,7 @@ func AccrualDataInit(AccrualAddr string, numberWorkers int) *AccrualData {
 }
 
 // функция периодически отправляющая данные к сервису расчета количеств баллов
-func (AccDt *AccrualData) LoadNumberToApi(RequestPool chan models.OrderAns, ResulReqCh chan models.OrderAns) {
+func (AccDt *AccrualData) LoadNumberToAPI(RequestPool chan models.OrderAns, ResulReqCh chan models.OrderAns) {
 	go func() {
 		for {
 			select {
@@ -45,6 +45,7 @@ func (AccDt *AccrualData) LoadNumberToApi(RequestPool chan models.OrderAns, Resu
 						continue
 					}
 					AccDt.waitCh <- timeSleep
+					logger.Log.Error("Too many requests to accrual. Activated by header!")
 					time.Sleep(timeSleep)
 				} else if response.StatusCode == http.StatusNoContent {
 					outBuff.Accrual = 0.0
@@ -60,6 +61,7 @@ func (AccDt *AccrualData) LoadNumberToApi(RequestPool chan models.OrderAns, Resu
 				}
 			case timeSleep := <-AccDt.waitCh:
 				time.Sleep(timeSleep)
+				logger.Log.Error("Too many requests to accrual. Activated by chanel!")
 			default:
 				continue
 			}

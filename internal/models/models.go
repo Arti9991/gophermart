@@ -40,7 +40,7 @@ type WithData struct {
 
 type UserWithdraw struct {
 	Number     string  `json:"order"`
-	Accrual    float64 `json:"accrual,omitempty"`
+	Accrual    float64 `json:"sum,omitempty"`
 	LoadedTime string  `json:"uploaded_at"`
 }
 

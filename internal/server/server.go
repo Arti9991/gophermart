@@ -31,7 +31,7 @@ type Server struct {
 func InitServer() Server {
 	var server Server
 	var err error
-	const numJobs = 8
+	const numJobs = 4
 	// установка сида для случайных чисел
 	rand.Seed(uint64(time.Now().UnixNano()))
 	// инциализация логгера
@@ -97,15 +97,11 @@ func RunServer() error {
 	return nil
 }
 
-// TODO: пересмотреть логику взаимодействия горутин
-// возможно стоит пересмотреть самоу логику функций, их наполнение
-// и области их запуска
-// запуск всех ассинхронных функций связанных с accrual
 func AccrRun(server *Server) {
 	updateCh := make(chan models.OrderAns, server.AccrServ.NumberWorks)
 	rawDataCh := server.hd.StorOrder.GetAccurOrders(server.AccrServ.NumberWorks)
 	for range server.AccrServ.NumberWorks {
-		server.AccrServ.LoadNumberToApi(rawDataCh, updateCh)
+		server.AccrServ.LoadNumberToAPI(rawDataCh, updateCh)
 	}
 	server.hd.StorOrder.SetAccurOrders(updateCh)
 }

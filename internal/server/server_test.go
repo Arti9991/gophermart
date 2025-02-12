@@ -113,10 +113,10 @@ func TestRouter(t *testing.T) {
 
 		// запрос на регистрацию (если зарегистрирован, то уже на логин)
 		resp := testRequestRegistration(t, ts, test.requestRegistr, bytes.NewBuffer([]byte(test.UserInfo)))
-		defer resp.Body.Close()
 		if resp.StatusCode == http.StatusConflict {
 			resp = testRequestRegistration(t, ts, test.requestLogin, bytes.NewBuffer([]byte(test.UserInfo)))
 		}
+		resp.Body.Close()
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)
 		// проверяем наличие cookie
 		assert.True(t, len(resp.Cookies()) > 0)
@@ -126,6 +126,7 @@ func TestRouter(t *testing.T) {
 			header := map[string]string{"Content-Type": "text/plain"}
 			resp := testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestOrder, strings.NewReader(order))
 			assert.True(t, (resp.StatusCode == test.want.statusCodeAccepted || resp.StatusCode == test.want.statusCodeOK))
+			resp.Body.Close()
 		}
 		time.Sleep(10000 * time.Microsecond)
 		// запрос на получение баланса пользователя
@@ -136,6 +137,7 @@ func TestRouter(t *testing.T) {
 		var outBuff1 models.BalanceData
 		json.NewDecoder(resp.Body).Decode(&outBuff1)
 		fmt.Println(outBuff1)
+		resp.Body.Close()
 
 		// запрос на списание средств больших чем баланс пользователя (должен не списать)
 		var WithdrawUser models.WithData
@@ -146,6 +148,7 @@ func TestRouter(t *testing.T) {
 		header := map[string]string{"Content-Type": "application/json"}
 		resp = testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestWutdraw, bytes.NewBuffer(reqBuff))
 		assert.Equal(t, test.want.statusCodePayment, resp.StatusCode)
+		resp.Body.Close()
 
 		// запрос на списание средств меньших чем баланс пользователя (должен списать и записать заказ на списание)
 		WithdrawUser.Sum = outBuff1.Sum - 20
@@ -153,6 +156,7 @@ func TestRouter(t *testing.T) {
 		require.NoError(t, err)
 		resp = testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestWutdraw, bytes.NewBuffer(reqBuff))
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)
+		resp.Body.Close()
 
 		// запрос на проверку баланса пользователя
 		resp = testRequest(t, ts, http.MethodGet, nil, tokenCookie, test.requestCheckBalance, nil)
@@ -164,5 +168,6 @@ func TestRouter(t *testing.T) {
 		fmt.Println(outBuff2)
 		// сравниваем баланс с разнцией в запроса на списание
 		assert.Equal(t, 20.00, outBuff2.Sum)
+		resp.Body.Close()
 	}
 }

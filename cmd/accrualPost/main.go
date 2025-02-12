@@ -34,7 +34,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = PostNumberToApi("http://localhost:8083/", 25, types)
+	err = PostNumberToAPI("http://localhost:8083/", 25, types)
 	if err != nil {
 		panic(err)
 	}
@@ -106,7 +106,7 @@ func NewGoodsTypes(AccAddr string) ([]GoodType, error) {
 }
 
 // создаем список возможных заказов, которые доступны в accrual
-func PostNumberToApi(AccAddr string, n int, Types []GoodType) error {
+func PostNumberToAPI(AccAddr string, n int, Types []GoodType) error {
 	file, err := os.OpenFile("orders_numbers.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		fmt.Print("ERROR IN FILE OPEN")
