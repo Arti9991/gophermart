@@ -42,6 +42,7 @@ func (AccDt *AccrualData) LoadNumberToAPI(RequestPool chan models.OrderAns, Resu
 					timeSleep, err2 := time.ParseDuration(sleepTimeStr)
 					if err2 != nil {
 						logger.Log.Error("Error in ParseDuration", zap.Error(err))
+						response.Body.Close()
 						continue
 					}
 					AccDt.waitCh <- timeSleep
@@ -58,6 +59,7 @@ func (AccDt *AccrualData) LoadNumberToAPI(RequestPool chan models.OrderAns, Resu
 						logger.Log.Error("Error in Decode", zap.Error(err))
 					}
 					ResulReqCh <- outBuff
+					response.Body.Close()
 				}
 			case timeSleep := <-AccDt.waitCh:
 				time.Sleep(timeSleep)
