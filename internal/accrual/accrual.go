@@ -32,7 +32,6 @@ func (AccDt *AccrualData) LoadNumberToApi(numCh <-chan models.OrderAns) chan mod
 				// выполняем запрос для получения информации по рассчету баллов
 				response, err := http.Get(reqURI)
 				if err != nil {
-					response.Body.Close()
 					logger.Log.Error("Error in GET", zap.Error(err))
 					continue
 				}
