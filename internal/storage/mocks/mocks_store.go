@@ -117,17 +117,17 @@ func (m *MockStorOrderFunc) EXPECT() *MockStorOrderFuncMockRecorder {
 }
 
 // GetAccurOrders mocks base method.
-func (m *MockStorOrderFunc) GetAccurOrders() chan models.OrderAns {
+func (m *MockStorOrderFunc) GetAccurOrders(num int) chan models.OrderAns {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetAccurOrders")
+	ret := m.ctrl.Call(m, "GetAccurOrders", num)
 	ret0, _ := ret[0].(chan models.OrderAns)
 	return ret0
 }
 
 // GetAccurOrders indicates an expected call of GetAccurOrders.
-func (mr *MockStorOrderFuncMockRecorder) GetAccurOrders() *gomock.Call {
+func (mr *MockStorOrderFuncMockRecorder) GetAccurOrders(num interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).GetAccurOrders))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).GetAccurOrders), num)
 }
 
 // GetUserOrders mocks base method.
@@ -189,13 +189,13 @@ func (mr *MockStorOrderFuncMockRecorder) SaveWithdrawOrder(UserID, number, sum i
 }
 
 // SetAccurOrders mocks base method.
-func (m *MockStorOrderFunc) SetAccurOrders(inp chan models.OrderAns) {
+func (m *MockStorOrderFunc) SetAccurOrders(writeCh chan models.OrderAns) {
 	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetAccurOrders", inp)
+	m.ctrl.Call(m, "SetAccurOrders", writeCh)
 }
 
 // SetAccurOrders indicates an expected call of SetAccurOrders.
-func (mr *MockStorOrderFuncMockRecorder) SetAccurOrders(inp interface{}) *gomock.Call {
+func (mr *MockStorOrderFuncMockRecorder) SetAccurOrders(writeCh interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).SetAccurOrders), inp)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetAccurOrders", reflect.TypeOf((*MockStorOrderFunc)(nil).SetAccurOrders), writeCh)
 }

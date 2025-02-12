@@ -1,4 +1,5 @@
-{"level":"info","ts":"Wed, 12 Feb 2025 00:08:30 MSK","msg":"Logger initialyzed!","In file mode:":true}
-{"level":"info","ts":"Wed, 12 Feb 2025 00:08:30 MSK","msg":"✓ created users table!"}
-{"level":"info","ts":"Wed, 12 Feb 2025 00:08:30 MSK","msg":"✓ created orders table!"}
-{"level":"info","ts":"Wed, 12 Feb 2025 00:08:30 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
+{"level":"info","ts":"Wed, 12 Feb 2025 13:26:26 MSK","msg":"Logger initialyzed!","In file mode:":true}
+{"level":"info","ts":"Wed, 12 Feb 2025 13:26:26 MSK","msg":"✓ created users table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 13:26:26 MSK","msg":"✓ created orders table!"}
+{"level":"info","ts":"Wed, 12 Feb 2025 13:26:26 MSK","msg":"New server initialyzed!","Server addres:":":8082","DB info:":"host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable","Accur address:":"http://localhost:8083/"}
+{"level":"error","ts":"Wed, 12 Feb 2025 13:28:46 MSK","msg":"Error in creating Query","error":"ОШИБКА: отношение \"orders\" не существует (SQLSTATE 42P01)"}

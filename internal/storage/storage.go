@@ -12,8 +12,8 @@ type StorUserFunc interface {
 type StorOrderFunc interface {
 	SaveNewOrder(UserID string, number string) error
 	GetUserOrders(UserID string) (models.UserOrdersList, error)
-	GetAccurOrders(numCh chan models.OrderAns)
-	SetAccurOrders(toWrite models.OrderAns)
+	GetAccurOrders(num int) chan models.OrderAns
+	SetAccurOrders(writeCh chan models.OrderAns)
 	SaveWithdrawOrder(UserID string, number string, sum float64) error
 	GetUserWithdrawals(UserID string) (models.UserWithdrawList, error)
 }

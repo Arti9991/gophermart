@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"gophermart/internal/logger"
 	"gophermart/internal/models"
 	"gophermart/internal/storage"
@@ -126,7 +125,6 @@ func (db *DBStor) MinusUserBalance(sum float64, UserID string) error {
 		return err
 	}
 	if userBalance < 0 {
-		fmt.Println(userBalance)
 		tx.Rollback()
 		return models.ErrorNoSuchBalance
 	}

@@ -10,6 +10,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -126,6 +127,7 @@ func TestRouter(t *testing.T) {
 			resp := testRequest(t, ts, http.MethodPost, header, tokenCookie, test.requestOrder, strings.NewReader(order))
 			assert.True(t, (resp.StatusCode == test.want.statusCodeAccepted || resp.StatusCode == test.want.statusCodeOK))
 		}
+		time.Sleep(10000 * time.Microsecond)
 		// запрос на получение баланса пользователя
 		resp = testRequest(t, ts, http.MethodGet, nil, tokenCookie, test.requestCheckBalance, nil)
 		assert.Equal(t, test.want.statusCodeOK, resp.StatusCode)

@@ -31,7 +31,7 @@ type Server struct {
 func InitServer() Server {
 	var server Server
 	var err error
-
+	const numJobs = 8
 	// установка сида для случайных чисел
 	rand.Seed(uint64(time.Now().UnixNano()))
 	// инциализация логгера
@@ -53,7 +53,7 @@ func InitServer() Server {
 	// инциализация структуры с данными для хэндлеров
 	server.hd = handlers.HandlersDataInit(server.Config.HostAddr, server.Config.AccurAddr, server.DataBase, server.DataBase)
 	// инциализация строктуры для accrual
-	server.AccrServ = accrual.AccrualDataInit(server.Config.AccurAddr, 5)
+	server.AccrServ = accrual.AccrualDataInit(server.Config.AccurAddr, numJobs)
 
 	return server
 }
@@ -87,7 +87,7 @@ func RunServer() error {
 		zap.String("Accur address:", server.Config.AccurAddr),
 	)
 
-	go AccrRun(&server)
+	AccrRun(&server)
 
 	err := http.ListenAndServe(server.Config.HostAddr, server.MainRouter())
 	if err != nil {
@@ -102,12 +102,10 @@ func RunServer() error {
 // и области их запуска
 // запуск всех ассинхронных функций связанных с accrual
 func AccrRun(server *Server) {
-	server.hd.StorOrder.GetAccurOrders(server.AccrServ.RequestPool)
-	for outBuf := range server.AccrServ.RequestPool {
-		server.DataBase.Wg.Add(1)
-		go func(outBuf models.OrderAns) {
-			respBuff := server.AccrServ.LoadNumberToApi(outBuf)
-			server.hd.StorOrder.SetAccurOrders(respBuff)
-		}(outBuf)
+	updateCh := make(chan models.OrderAns, server.AccrServ.NumberWorks)
+	rawDataCh := server.hd.StorOrder.GetAccurOrders(server.AccrServ.NumberWorks)
+	for range server.AccrServ.NumberWorks {
+		server.AccrServ.LoadNumberToApi(rawDataCh, updateCh)
 	}
+	server.hd.StorOrder.SetAccurOrders(updateCh)
 }
