@@ -11,7 +11,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED', 'WITHDRAW');`
+var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED', 'REGISTERED', 'WITHDRAW');`
 var QuerryCreateorderStor = `
 	CREATE TABLE IF NOT EXISTS orders (
     id SERIAL PRIMARY KEY,
@@ -27,9 +27,9 @@ var QuerrySaveNewOrder = `INSERT INTO orders (id, user_id, number, status, accru
 var QuerryGetUserForNumber = `SELECT user_id FROM orders 
 	WHERE number = $1 LIMIT 1;`
 var QuerryGetUserOrders = `SELECT number, status, accrual, uploaded_at FROM orders 
-	WHERE user_id = $1 AND status != 'WITHDRAW' ORDER BY uploaded_at DESC;`
+	WHERE user_id = $1 AND (status != 'WITHDRAW' OR status != 'REGISTERED') ORDER BY uploaded_at DESC;`
 var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
-	WHERE status = 'NEW' OR status = 'PROCESSING';`
+	WHERE status = 'NEW' OR status = 'PROCESSING' OR status = 'REGISTERED';`
 var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
 var QuerrySaveWithdrawOrder = `INSERT INTO orders (id, user_id, number, status, accrual, uploaded_at)
   	VALUES  (DEFAULT, $1, $2, 'WITHDRAW', $3, $4);`
