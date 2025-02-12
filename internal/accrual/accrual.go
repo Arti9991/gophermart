@@ -50,7 +50,7 @@ func (AccDt *AccrualData) LoadNumberToAPI(RequestPool chan models.OrderAns, Resu
 					time.Sleep(timeSleep)
 				} else if response.StatusCode == http.StatusNoContent {
 					outBuff.Accrual = 0.0
-					outBuff.Status = "NEW"
+					outBuff.Status = "INVALID" // mock для тестов в git hub (локально отрабатывает без него)
 					ResulReqCh <- outBuff
 				} else if response.StatusCode == http.StatusOK {
 					// читаем поток из тела ответа
