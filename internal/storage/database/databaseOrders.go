@@ -11,7 +11,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED', 'REGISTERED', 'WITHDRAW');`
+var QuerryCreateTypeStatus = `CREATE TYPE status AS ENUM('NEW', 'PROCESSING', 'INVALID', 'PROCESSED', 'REGISTERED', 'WITHDRAW', 'EMPTY');`
 var QuerryCreateorderStor = `
 	CREATE TABLE IF NOT EXISTS orders (
     id SERIAL PRIMARY KEY,
@@ -27,7 +27,7 @@ var QuerrySaveNewOrder = `INSERT INTO orders (id, user_id, number, status, accru
 var QuerryGetUserForNumber = `SELECT user_id FROM orders 
 	WHERE number = $1 LIMIT 1;`
 var QuerryGetUserOrders = `SELECT number, status, accrual, uploaded_at FROM orders 
-	WHERE user_id = $1 AND (status != 'WITHDRAW' OR status != 'REGISTERED') ORDER BY uploaded_at DESC;`
+	WHERE user_id = $1 AND (status != 'WITHDRAW' OR status != 'REGISTERED' or status != 'EMPTY') ORDER BY uploaded_at DESC;`
 var QuerryGetAccurOrders = `SELECT number, status, user_id  FROM orders
 	WHERE status = 'NEW' OR status = 'PROCESSING' OR status = 'REGISTERED';`
 var QuerrySaveAccurOrders = `UPDATE orders SET status = $1, accrual = $2 WHERE number = $3;`
@@ -97,6 +97,7 @@ func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 	var err error
 	var ordersList models.UserOrdersList
 	var OpTime time.Time
+	var Stat string
 	rows, err := db.DB.Query(QuerryGetUserOrders, UserID)
 	if err != nil {
 		return nil, err
@@ -105,9 +106,14 @@ func (db *DBStor) GetUserOrders(UserID string) (models.UserOrdersList, error) {
 
 	for rows.Next() {
 		var order models.UserOrder
-		err := rows.Scan(&order.Number, &order.Status, &order.Accrual, &OpTime)
+		err := rows.Scan(&order.Number, &Stat, &order.Accrual, &OpTime)
 		if err != nil {
 			return nil, err
+		}
+		if Stat == "EMPTY" {
+			order.Status = "NEW"
+		} else {
+			order.Status = Stat
 		}
 		order.LoadedTime = OpTime.Format(time.RFC3339)
 		ordersList = append(ordersList, order)

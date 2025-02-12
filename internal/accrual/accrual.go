@@ -49,7 +49,7 @@ func (AccDt *AccrualData) LoadNumberToAPI(numCh <-chan models.OrderAns) chan mod
 					continue
 				} else if response.StatusCode == http.StatusNoContent {
 					outBuff.Accrual = 0.0
-					outBuff.Status = "NEW"
+					outBuff.Status = "EMPTY"
 				} else if response.StatusCode == http.StatusOK {
 					// читаем поток из тела ответа
 					err = json.NewDecoder(response.Body).Decode(&outBuff)
