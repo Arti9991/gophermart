@@ -8,6 +8,7 @@
 # # Logs and config files
 *.yaml
 *.log
+*.csv
 
 # Test binary, built with `go test -c`
 *.test

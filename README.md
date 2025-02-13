@@ -38,7 +38,7 @@ curl -v -X POST -H "Content-Type: application/json" -d '{"login":"User","passwor
 
 Запрос на отправку номера заказа от пользователя
 ```
-curl -v -X POST -H "Content-Type: text/plain" --cookie "Token=<cookie>" -d 1234567890101112131415 http://localhost:8082/api/user/orders
+curl -v -X POST -H "Content-Type: text/plain" --cookie "Token=<cookie>" -d 142434877838532 http://localhost:8082/api/user/orders
 ```
 Запрос на на получение всех заказов пользователя
 ```
@@ -47,7 +47,7 @@ curl -v -X GET --cookie "Token=<cookie>" http://localhost:8082/api/user/orders
 
 Запрос на списание средств с накопительного счета пользователя
 ```
-curl -v -X POST -H "Content-Type: application/json" --cookie "Token=<cookie>" -d '{"order":<order_num>,"sum": 500}' http://localhost:8082/api/user/balance/withdraw
+curl -v -X POST -H "Content-Type: application/json" --cookie "Token=<cookie>" -d '{"order":"<order_num>","sum": 500}' http://localhost:8082/api/user/balance/withdraw
 ```
 Запрос на отображение баланса пользователя
 ```
