@@ -19,7 +19,7 @@ import (
 //var key = []byte{99, 65, 113, 122, 87, 106, 113, 81, 114, 115, 66, 117, 107, 81, 116, 108, 73, 77, 75, 111, 89, 71, 79, 106, 118, 76, 69, 106, 115, 116, 75, 101}
 
 var InFileLog = true
-var FileConfig = true
+var FileConfig = false
 
 type Server struct {
 	Config   config.Config
