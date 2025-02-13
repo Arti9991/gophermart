@@ -67,6 +67,7 @@ func (AccDt *AccrualData) LoadNumberToAPI(RequestPool chan models.OrderAns, Resu
 			default:
 				continue
 			}
+			time.Sleep(50 * time.Millisecond)
 		}
 	}()
 }

@@ -11,7 +11,6 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var FileConfig = false
 var ConfigPath = "Config.yaml"
 
 type Config struct {
@@ -23,7 +22,7 @@ type Config struct {
 
 // инициализация конфигурации
 // (внутри есть флаг FileConfig для чтения конфигурации из файла)
-func InitConf() Config {
+func InitConf(FileConfig bool) Config {
 
 	if FileConfig {
 		config := ReadConfig(ConfigPath)

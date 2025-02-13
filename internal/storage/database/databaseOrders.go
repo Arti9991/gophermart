@@ -174,30 +174,26 @@ func (db *DBStor) GetAccurOrders(num int) chan models.OrderAns {
 // функция для записи обновленных данных в базу в таблицы users и orders
 func (db *DBStor) SetAccurOrders(writeCh chan models.OrderAns) {
 	go func() {
-		for {
-			select {
-			case toWrite := <-writeCh:
-				// проверяем обновился ли статус заказа
-				if toWrite.Status != toWrite.StatusOld {
-					// для нового статуса записываем новые данные в базу о заказах
-					_, err := db.DB.Exec(QuerrySaveAccurOrders, toWrite.Status, toWrite.Accrual, toWrite.Number)
+		for toWrite := range writeCh {
+			// проверяем обновился ли статус заказа
+			if toWrite.Status != toWrite.StatusOld {
+				// для нового статуса записываем новые данные в базу о заказах
+				_, err := db.DB.Exec(QuerrySaveAccurOrders, toWrite.Status, toWrite.Accrual, toWrite.Number)
+				if err != nil {
+					logger.Log.Error("Error in rows", zap.Error(err))
+				}
+				// если статус операции успешеный, прибавляеми сумму баллов на баланс пользователя
+				if toWrite.Status == "PROCESSED" {
+					// функция для обнловления баланса пользователя с прибавлением полученных баллов
+					err := db.AddUserBalance(toWrite.Accrual, toWrite.UserID)
 					if err != nil {
-						logger.Log.Error("Error in rows", zap.Error(err))
-					}
-					// если статус операции успешеный, прибавляеми сумму баллов на баланс пользователя
-					if toWrite.Status == "PROCESSED" {
-						// функция для обнловления баланса пользователя с прибавлением полученных баллов
-						err := db.AddUserBalance(toWrite.Accrual, toWrite.UserID)
-						if err != nil {
-							logger.Log.Error("Error in AddUserBalance", zap.Error(err))
-						}
+						logger.Log.Error("Error in AddUserBalance", zap.Error(err))
 					}
 				}
-				// уведомляем стартовую горутину об успешной операции записи
-				db.Wg.Done()
-			default:
-				continue
 			}
+			// уведомляем стартовую горутину об успешной операции записи
+			db.Wg.Done()
+			time.Sleep(50 * time.Millisecond)
 		}
 	}()
 

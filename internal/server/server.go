@@ -19,6 +19,7 @@ import (
 //var key = []byte{99, 65, 113, 122, 87, 106, 113, 81, 114, 115, 66, 117, 107, 81, 116, 108, 73, 77, 75, 111, 89, 71, 79, 106, 118, 76, 69, 106, 115, 116, 75, 101}
 
 var InFileLog = true
+var FileConfig = true
 
 type Server struct {
 	Config   config.Config
@@ -31,7 +32,7 @@ type Server struct {
 func InitServer() Server {
 	var server Server
 	var err error
-	const numJobs = 8
+	const numJobs = 4
 	// установка сида для случайных чисел
 	rand.Seed(uint64(time.Now().UnixNano()))
 	// инциализация логгера
@@ -40,7 +41,7 @@ func InitServer() Server {
 		zap.Bool("In file mode:", InFileLog),
 	)
 	// инциализация и получение данных для конфиогурации сервера
-	server.Config = config.InitConf()
+	server.Config = config.InitConf(FileConfig)
 	server.DataBase, err = database.DBInit(server.Config.DBAdr)
 	if err != nil {
 		logger.Log.Fatal("Error in initialyzed database for users", zap.Error(err))
