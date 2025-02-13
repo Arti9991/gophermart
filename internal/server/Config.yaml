@@ -1,0 +1,4 @@
+host_address: :8082
+database_info: host=localhost user=myuser password=123456 dbname=Gophermart sslmode=disable
+api_address: http://localhost:8083
+logger_file_address: true
