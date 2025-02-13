@@ -1,0 +1,70 @@
+package main
+
+import (
+	"strconv"
+
+	"golang.org/x/exp/rand"
+)
+
+func GenerateOrderNumber() string {
+
+	ds := DigitString(5, 15)
+	cd, err := luhnCheckDigit(ds)
+	if err != nil {
+		return ""
+	}
+	return ds + strconv.Itoa(cd)
+}
+
+func luhnCheckDigit(s string) (int, error) {
+	number, err := strconv.Atoi(s)
+	if err != nil {
+		return 0, err
+	}
+
+	checkNumber := luhnChecksum(number)
+
+	if checkNumber == 0 {
+		return 0, nil
+	}
+	return 10 - checkNumber, nil
+}
+
+func luhnChecksum(number int) int {
+	var luhn int
+
+	for i := 0; number > 0; i++ {
+		cur := number % 10
+
+		if i%2 == 0 { // even
+			cur = cur * 2
+			if cur > 9 {
+				cur = cur%10 + cur/10
+			}
+		}
+
+		luhn += cur
+		number = number / 10
+	}
+	return luhn % 10
+}
+
+func DigitString(minLen, maxLen int) string {
+	var letters = "0123456789"
+
+	slen := rand.Intn(maxLen-minLen) + minLen
+
+	s := make([]byte, 0, slen)
+	i := 0
+	for len(s) < slen {
+		idx := rand.Intn(len(letters) - 1)
+		char := letters[idx]
+		if i == 0 && char == '0' {
+			continue
+		}
+		s = append(s, char)
+		i++
+	}
+
+	return string(s)
+}

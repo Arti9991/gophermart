@@ -1,0 +1,37 @@
+package handlers
+
+import (
+	"encoding/json"
+	"gophermart/internal/logger"
+	"gophermart/internal/models"
+	"net/http"
+
+	"go.uber.org/zap"
+)
+
+// хэндлер для размещения заказа в системе (заглушка)
+func GetBalance(hd *HandlersData) http.HandlerFunc {
+	return func(res http.ResponseWriter, req *http.Request) {
+
+		UserInfo := req.Context().Value(models.CtxKey).(models.UserInfo)
+		UserID := UserInfo.UserID
+
+		BalanceList, err := hd.StorUser.GetUserBalance(UserID)
+		if err != nil {
+			logger.Log.Error("Error in get orders", zap.Error(err))
+			res.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		// кодирование тела ответа
+		out, err := json.Marshal(BalanceList)
+		if err != nil {
+			logger.Log.Error("Bad Marshall for out body", zap.Error(err))
+			res.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+		res.Header().Set("content-type", "application/json")
+		res.WriteHeader(http.StatusOK)
+		res.Write(out)
+	}
+
+}
