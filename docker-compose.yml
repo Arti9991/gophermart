@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  gophermart:
+    build: .
+    container_name: gophermart
+    ports:
+      - '8082:8082'
+    environment:
+      DATABASE_URI: host=postgres user=myuser password=123456 dbname=Gophermart sslmode=disable
+      RUN_ADDRESS: :8082
+      ACCRUAL_SYSTEM_ADDRESS: http://accrual:8083
+    depends_on:
+      - postgres
+      - accrual
+    networks:
+      - gophermart
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: Gophermart
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - '5432:5432'
+    networks:
+      - gophermart
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U myuser -d Gophermart" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+  accrual:
+    build: /cmd/accrual
+    container_name: accrual
+    ports:
+      - '8083:8083'
+    networks:
+      - gophermart
+networks:
+  gophermart:
+    name: gophermart
+    driver: bridge
